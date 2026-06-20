@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sempurnakan Isi Modul Kokurikuler P5</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #1e3d59, #17a2b8);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .card-custom {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            background: #ffffff;
+        }
+        .card-custom:focus-within {
+            box-shadow: 0 4px 16px rgba(23, 162, 184, 0.15);
+        }
+        .card-header-custom {
+            background-color: #1e3d59;
+            color: white;
+            font-weight: 600;
+            border-radius: 12px 12px 0 0 !important;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+        }
+        .guide-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #17a2b8;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.95rem;
+        }
+        .table-custom th {
+            background-color: #e8f1f5;
+            color: #1e3d59;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container main-container">
+    
+    <div class="header-section text-center">
+        <h1 class="fw-bold mb-2">Sistematika Modul Kokurikuler (P5)</h1>
+        <p class="lead mb-0">Panduan Lengkap Penyusunan Modul Projek Penguatan Profil Pelajar Pancasila</p>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">A. Identitas Modul</div>
+        <div class="card-body p-4">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nama Sekolah</label>
+                    <input type="text" class="form-control" placeholder="Isi nama sekolah Anda">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Tahun Ajaran</label>
+                    <select class="form-select">
+                        <option value="" disabled selected>Pilih Tahun Ajaran...</option>
+                        <option value="2025/2026">2025/2026</option>
+                        <option value="2026/2027">2026/2027</option>
+                        <option value="2027/2028">2027/2028</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Jenjang / Kelas / Fase</label>
+                    <select class="form-select">
+                        <option value="" disabled selected>Pilih Jenjang & Fase...</option>
+                        <option value="SD - Kelas 1 (Fase A)">SD - Kelas 1 (Fase A)</option>
+                        <option value="SD - Kelas 2 (Fase A)">SD - Kelas 2 (Fase A)</option>
+                        <option value="SD - Kelas 3 (Fase B)">SD - Kelas 3 (Fase B)</option>
+                        <option value="SD - Kelas 4 (Fase B)">SD - Kelas 4 (Fase B)</option>
+                        <option value="SD - Kelas 5 (Fase C)">SD - Kelas 5 (Fase C)</option>
+                        <option value="SD - Kelas 6 (Fase C)">SD - Kelas 6 (Fase C)</option>
+                        <option value="SMP - Kelas 7 (Fase D)">SMP - Kelas 7 (Fase D)</option>
+                        <option value="SMP - Kelas 8 (Fase D)">SMP - Kelas 8 (Fase D)</option>
+                        <option value="SMP - Kelas 9 (Fase D)">SMP - Kelas 9 (Fase D)</option>
+                        <option value="SMA/SMK - Kelas 10 (Fase E)">SMA/SMK - Kelas 10 (Fase E)</option>
+                        <option value="SMA/SMK - Kelas 11 (Fase F)">SMA/SMK - Kelas 11 (Fase F)</option>
+                        <option value="SMA/SMK - Kelas 12 (Fase F)">SMA/SMK - Kelas 12 (Fase F)</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Tema Kokurikuler</label>
+                    <select class="form-select" id="selectTema" onchange="updateOtomatisAll()">
+                        <option value="" disabled selected>Pilih Tema P5...</option>
+                        <option value="Gaya Hidup Berkelanjutan">Gaya Hidup Berkelanjutan</option>
+                        <option value="Kearifan Lokal">Kearifan Lokal</option>
+                        <option value="Bhinneka Tunggal Ika">Bhinneka Tunggal Ika</option>
+                        <option value="Bangunlah Jiwa dan Raganya">Bangunlah Jiwa dan Raganya</option>
+                        <option value="Suara Demokrasi">Suara Demokrasi</option>
+                        <option value="Berekayasa dan Berteknologi untuk Membangun NKRI">Berekayasa dan Berteknologi untuk Membangun NKRI</option>
+                        <option value="Kewirausahaan">Kewirausahaan</option>
+                        <option value="Kebekerjaan (Khusus SMK)">Kebekerjaan (Khusus SMK)</option>
+                        <option value="Tema Khusus Karakteristik Sekolah">Tema Khusus Karakteristik Sekolah</option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <label class="form-label">Judul Kegiatan / Proyek</label>
+                    <input type="text" class="form-control" id="judulProyek" placeholder="Judul proyek akan terisi otomatis setelah memilih tema...">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Alokasi Waktu</label>
+                    <select class="form-select">
+                        <option value="" disabled selected>Pilih Total Alokasi Waktu...</option>
+                        <option value="36 JP">36 JP</option>
+                        <option value="48 JP">48 JP</option>
+                        <option value="54 JP">54 JP</option>
+                        <option value="72 JP">72 JP</option>
+                        <option value="108 JP">108 JP</option>
+                        <option value="144 JP">144 JP</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Penyusun Modul</label>
+                    <input type="text" class="form-control" placeholder="Nama Guru / Tim Fasilitator">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">B. Latar Belakang Projek</div>
+        <div class="card-body p-4">
+            <div class="guide-box">
+                <strong>Panduan Pengisian:</strong> Tuliskan alasan pelaksanaan kegiatan dalam bentuk narasi komprehensif yang mencakup kebutuhan peserta didik, karakteristik sekolah, keterkaitan visi-misi, serta relevansi lingkungan.
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Narasi Latar Belakang</label>
+                <textarea class="form-control" id="latarBelakang" rows="7" placeholder="Narasi latar belakang akan terisi otomatis setelah memilih tema..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">C. Tujuan Kegiatan</div>
+        <div class="card-body p-4">
+            <div class="mb-3">
+                <label class="form-label">1. Tujuan Umum</label>
+                <textarea class="form-control" rows="2">Menumbuhkembangkan kompetensi dan karakter peserta didik agar selaras dengan nilai-nilai luhur Pancasila melalui pembelajaran berbasis projek nyata.</textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">2. Tujuan Khusus</label>
+                <textarea class="form-control" id="tujuanKhusus" rows="2" placeholder="Tujuan khusus akan terisi otomatis setelah memilih tema..."></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">3. Tujuan Akhir Kegiatan Kokurikuler</label>
+                <textarea class="form-control" id="tujuanAkhir" rows="5" placeholder="Poin-poin tujuan akhir kokurikuler akan terisi otomatis setelah memilih tema..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">D. Profil Lulusan yang Dituju (Dimensi P5)</div>
+        <div class="card-body p-4">
+            <div class="guide-box">Pilih 2 atau 3 dimensi utama karakter Profil Pelajar Pancasila yang ingin difokuskan pada projek ini:</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="p5-1">
+                        <label class="form-check-label" for="p5-1">Beriman, Bertakwa kepada Tuhan YME, dan Berakhlak Mulia</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="p5-2">
+                        <label class="form-check-label" for="p5-2">Berkebinekaan Global</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="p5-3">
+                        <label class="form-check-label" for="p5-3">Gotong Royong</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="p5-4">
+                        <label class="form-check-label" for="p5-4">Mandiri</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="p5-5">
+                        <label class="form-check-label" for="p5-5">Bernalar Kritis</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="p5-6">
+                        <label class="form-check-label" for="p5-6">Kreatif</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">E, F, G. Penyelarasan Tema & Capaian</div>
+        <div class="card-body p-4">
+            <div class="mb-3">
+                <label class="form-label">E. Tema dan Topik Kegiatan</label>
+                <input type="text" class="form-control mb-2" id="temaPembantu" placeholder="Tema (Akan terisi otomatis)">
+                <input type="text" class="form-control" id="topikPembantu" placeholder="Topik Fokus Spesifik Projek (Akan terisi otomatis)">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">F. Dimensi / Elemen / Sub-Elemen yang Dikembangkan</label>
+                <textarea class="form-control" id="dimensiElemen" rows="4" placeholder="Fokus dimensi, elemen, dan sub-elemen P5 akan terisi otomatis setelah memilih tema..."></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">G. Capaian / Tujuan Pembelajaran yang Didukung</label>
+                <textarea class="form-control" id="capaianDukung" rows="3" placeholder="Keterkaitan Capaian Pembelajaran lintas mata pelajaran akan terisi otomatis setelah memilih tema..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">H. Alur Kegiatan Projek Framework</div>
+        <div class="card-body p-4">
+            <div class="row g-2 text-center">
+                <div class="col-6 col-md-4"><div class="p-2 border bg-light rounded fw-semibold">1. Persiapan</div></div>
+                <div class="col-6 col-md-4"><div class="p-2 border bg-light rounded fw-semibold">2. Pengenalan</div></div>
+                <div class="col-6 col-md-4"><div class="p-2 border bg-light rounded fw-semibold">3. Eksplorasi</div></div>
+                <div class="col-6 col-md-4"><div class="p-2 border bg-light rounded fw-semibold">4. Aksi / Karya</div></div>
+                <div class="col-6 col-md-4"><div class="p-2 border bg-light rounded fw-semibold">5. Refleksi</div></div>
+                <div class="col-6 col-md-4"><div class="p-2 border bg-light rounded fw-semibold">6. Tindak Lanjut</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">I. Aktivitas Pembelajaran per Pertemuan</div>
+        <div class="card-body p-4">
+            <textarea class="form-control" id="aktivitasPertemuan" rows="8" placeholder="Rincian aktivitas modul per pertemuan akan terisi otomatis setelah memilih tema..."></textarea>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">J, K, L. Sarana, Asesmen & Output</div>
+        <div class="card-body p-4">
+            <div class="mb-3">
+                <label class="form-label">J. Media, Alat, dan Sumber Belajar</label>
+                <input type="text" class="form-control" id="mediaAlat" placeholder="Daftar video, LKPD, serta internet akan terisi otomatis setelah memilih tema...">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">K. Ragam Asesmen & Instrumen</label>
+                <input type="text" class="form-control mb-2" id="jenisAsesmen" placeholder="Jenis Asesmen (Diagnostik, Proses, Produk, Refleksi)">
+                <input type="text" class="form-control" id="instrumenAsesmen" placeholder="Instrumen Asesmen (Observasi, Rubrik, Jurnal, Portofolio)">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">L. Produk / Karya / Aksi yang Dihasilkan</label>
+                <input type="text" class="form-control" id="produkKarya" placeholder="Daftar poster, laporan, video, presentasi, atau pameran terisi otomatis...">
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">M. Jadwal Pelaksanaan Projek</div>
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle text-center table-custom">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Pertemuan Ke-</th>
+                            <th style="width: 25%;">Tanggal Pelaksanaan</th>
+                            <th style="width: 20%;">Durasi Waktu (JP)</th>
+                            <th style="width: 40%;">Agenda / Tahapan Alur</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelJadwalBody">
+                        <tr>
+                            <td colspan="4" class="text-muted py-3">Jadwal pelaksanaan akan digenerate otomatis setelah memilih tema di atas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">N. Penguatan Budaya Sekolah</div>
+        <div class="card-body p-4">
+            <textarea class="form-control" id="budayaSekolah" rows="3" placeholder="Nilai dan kebiasaan positif yang dibangun akan terisi otomatis setelah memilih tema..."></textarea>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">O. Refleksi</div>
+        <div class="card-body p-4">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <h6 class="fw-bold text-secondary">Refleksi Peserta Didik</h6>
+                    <textarea class="form-control" id="refleksiSiswa" rows="4" placeholder="Pertanyaan panduan refleksi siswa akan terisi otomatis..."></textarea>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="fw-bold text-secondary">Refleksi Guru</h6>
+                    <textarea class="form-control" id="refleksiGuru" rows="4" placeholder="Pertanyaan panduan refleksi guru akan terisi otomatis..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom">
+        <div class="card-header card-header-custom">P. Dokumen Lampiran Modul</div>
+        <div class="card-body p-4">
+            <div class="guide-box">
+                <strong>Dokumen Lampiran Wajib (Tercentang Otomatis Berdasarkan Karakteristik Tema):</strong>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="lampiran-lkpd" checked disabled> <label class="form-check-label" id="lbl-lkpd">Lembar Kerja Peserta Didik (LKPD)</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="lampiran-rubrik" checked disabled> <label class="form-check-label" id="lbl-rubrik">Rubrik Penilaian Lengkap</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="lampiran-dok" checked disabled> <label class="form-check-label" id="lbl-dok">Format Dokumentasi Kegiatan</label></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="lampiran-sikap" checked disabled> <label class="form-check-label" id="lbl-sikap">Instrumen Observasi Sikap</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="lampiran-absen" checked disabled> <label class="form-check-label" id="lbl-absen">Daftar Hadir</label></div>
+                    <div class="form-check mb-2"><input class="form-check-input" type="checkbox" id="lampiran-tambahan" checked disabled> <label class="form-check-label text-primary fw-semibold" id="lbl-tambahan">Katalog Penunjang Tema</label></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-end mb-5">
+        <button type="button" class="btn btn-primary btn-lg px-5 shadow" onclick="window.print()">Cetak / Simpan Sebagai PDF</button>
+    </div>
+
+</div>
+
+<script>
+function updateOtomatisAll() {
+    const temaPilihan = document.getElementById("selectTema").value;
+    
+    const inputJudul = document.getElementById("judulProyek");
+    const inputLatarBelakang = document.getElementById("latarBelakang");
+    const inputTujuanKhusus = document.getElementById("tujuanKhusus");
+    const inputTujuanAkhir = document.getElementById("tujuanAkhir");
+    const inputTemaPembantu = document.getElementById("temaPembantu");
+    const inputTopikPembantu = document.getElementById("topikPembantu");
+    const inputDimensiElemen = document.getElementById("dimensiElemen");
+    const inputCapaianDukung = document.getElementById("capaianDukung");
+    const inputAktivitasPertemuan = document.getElementById("aktivitasPertemuan");
+    const inputMediaAlat = document.getElementById("mediaAlat");
+    const inputJenisAsesmen = document.getElementById("jenisAsesmen");
+    const inputInstrumenAsesmen = document.getElementById("instrumenAsesmen");
+    const inputProdukKarya = document.getElementById("produkKarya");
+    
+    const inputBudayaSekolah = document.getElementById("budayaSekolah");
+    const inputRefleksiSiswa = document.getElementById("refleksiSiswa");
+    const inputRefleksiGuru = document.getElementById("refleksiGuru");
+    const lblTambahan = document.getElementById("lbl-tambahan");
+    const tabelJadwalBody = document.getElementById("tabelJadwalBody");
+
+    inputTemaPembantu.value = temaPilihan;
+
+    // Database Isian Berdasarkan Tema Kokurikuler P5
+    const dataP5Master = {
+        "Gaya Hidup Berkelanjutan": {
+            judul: "Projek Hijau Sekolahku: Pengelolaan Sampah dan Aksi Hemat Energi",
+            latar: "Pelaksanaan projek ini didasarkan pada kebutuhan peserta didik untuk membangun kepedulian lingkungan nyata sejak dini. Karakteristik sekolah kami yang memiliki ruang terbuka hijau potensial sangat mendukung gerakan pelestarian ekosistem. Hal ini selaras dengan visi sekolah dalam mewujudkan lingkungan yang asri dan berwawasan lingkungan. Relevansi lingkungan sekitar yang saat ini menghadapi tantangan darurat sampah memerlukan aksi nyata pengolahan sampah dan pembiasaan hidup hemat energi secara berkelanjutan.",
+            topik: "Membangun Kebiasaan Mengelola Sampah dan Bijak Memanfaatkan Sumber Daya",
+            tujuanKhusus: "Mengembangkan kepekaan ekologis siswa, keterampilan mengolah limbah organik/anorganik, serta kemampuan merancang kampanye hemat energi di sekolah.",
+            tujuanAkhir: "1. Peserta didik mampu menerapkan perilaku peduli lingkungan melalui kebiasaan menjaga kebersihan, pengelolaan sampah, dan pemanfaatan sumber daya secara bijak.\n2. Peserta didik mampu merancang dan melaksanakan aksi nyata untuk mendukung lingkungan sekolah yang sehat, bersih, dan berkelanjutan.\n3. Peserta didik mampu menunjukkan tanggung jawab sosial dan lingkungan dalam kehidupan sehari-hari.",
+            dimensi: "1. Gotong Royong (Elemen: Kolaborasi; Sub-elemen: Kerja sama untuk tujuan bersama)\n2. Bernalar Kritis (Elemen: Memperoleh informasi; Sub-elemen: Mengidentifikasi & mengolah gagasan lingkungan)\n3. Kreatif (Elemen: Menghasilkan karya; Sub-elemen: Membuat inovasi produk daur ulang)",
+            capaian: "Mendukung penguatan materi ekosistem (IPA/Biologi), perhitungan konversi sampah/energi (Matematika), serta penulisan narasi kampanye hijau (Bahasa Indonesia).",
+            media: "Video Krisis Sampah YouTube, Handout/LKPD Pemilahan, Internet, Lingkungan Sekolah, Timbangan Sampah.",
+            jAsesmen: "Asesmen Diagnostik Awal Kesiapan, Formatif Proses Diskusi, Sumatif Karya Produk Daur Ulang, Asesmen Refleksi Diri.",
+            iAsesmen: "Lembar Observasi Sikap Kolaborasi, Rubrik Kualitas Produk Daur Ulang, Jurnal Berkala, Portofolio Karya.",
+            produk: "Poster Kampanye Lingkungan, Pupuk Kompos Organik, Produk Kerajinan Daur Ulang Plastik, Video Aksi Hijau.",
+            aktivitas: "Pertemuan 1 (Pengenalan): Orientasi isu darurat sampah lewat video interaktif, brainstorming dampak bagi sekolah, pengisian LKPD refleksi awal.\nPertemuan 2 (Eksplorasi): Observasi lapangan di area sekolah, wawancara petugas kebersihan, analisis jenis sampah dominan.\nPertemuan 3 (Aksi/Karya): Workshop pembuatan kompos dan kerajinan daur ulang, perancangan media kampanye bebas plastik.\nPertemuan 4 (Refleksi & Tindak Lanjut): Evaluasi berkala efektivitas tong sampah pilah, komitmen harian menjaga kebersihan kelas.",
+            budaya: "Membangun budaya Zero Waste, pembiasaan operasi semut sebelum kelas dimulai, pengurangan botol plastik sekali pakai di kantin, serta gerakan mematikan lampu/kipas kelas yang tidak terpakai.",
+            refSiswa: "1. Apakah aku sudah memisahkan sampah sesuai jenisnya hari ini?\n2. Hambatan apa yang aku temui saat mengolah sampah organik kelompok?\n3. Bagaimana caraku menghemat pemakaian listrik di rumah dan sekolah?",
+            refGuru: "1. Apakah siswa menunjukkan peningkatan kepedulian terhadap kebersihan lingkungan sekolah?\n2. Hambatan teknis apa yang terjadi dalam praktik pembuatan kompos?\n3. Bagaimana tindak lanjut pembiasaan ini pasca-projek?",
+            lampiranTxt: "Panduan Pembuatan Kompos & Lembar Sortir Sampah",
+            jadwal: [
+                { jp: "4 JP", agenda: "Tahap Pengenalan: Orientasi isu sampah & sosialisasi projek" },
+                { jp: "6 JP", agenda: "Tahap Eksplorasi: Observasi lapangan & wawancara pemilahan" },
+                { jp: "8 JP", agenda: "Tahap Aksi: Praktik pembuatan kompos & pengolahan limbah" },
+                { jp: "4 JP", agenda: "Tahap Refleksi & Tindak Lanjut: Evaluasi aksi nyata lingkungan" }
+            ]
+        },
+        "Kearifan Lokal": {
+            judul: "Eksplorasi Budaya: Mengenal dan Melestarikan Tradisi Serta Kuliner Khas Daerah",
+            latar: "Di era digital, peserta didik membutuhkan jembatan untuk mengenal dan menghargai kembali akar budaya aslinya. Sekolah sebagai pusat kebudayaan memfasilitasi pelestarian tradisi, kesenian, dan makanan khas lokal. Projek ini terintegrasi erat dengan misi sekolah untuk membentuk generasi berkarakter luhur yang tidak melupakan jati diri bangsa. Kegiatan ini sangat relevan dengan lingkungan sekitar yang kaya akan nilai sejarah serta adat istiadat setempat yang perlu terus diwariskan.",
+            topik: "Mengenal, Mengkaji, dan Melestarikan Warisan Tradisional Daerah",
+            tujuanKhusus: "Meningkatkan literasi kebudayaan lokal, melatih kecakapan murid dalam mendokumentasikan tradisi lisan, serta keterampilan membuat karya seni/kuliner etnik.",
+            tujuanAkhir: "1. Peserta didik mampu mengenali, memahami, dan menghargai budaya serta tradisi daerah sebagai bagian dari identitas bangsa.\n2. Peserta didik mampu melestarikan nilai dan budaya lokal melalui karya, kegiatan, atau praktik nyata.\n3. Peserta didik mampu menampilkan sikap bangga terhadap budaya lokal serta menghormati keberagaman budaya.",
+            dimensi: "1. Berkebinekaan Global (Elemen: Mengenal budaya; Sub-elemen: Mendalami identitas budaya daerah)\n2. Gotong Royong (Elemen: Kolaborasi; Sub-elemen: Komunikasi koordinasi kelompok seni)\n3. Kreatif (Elemen: Menghasilkan gagasan; Sub-elemen: Modifikasi resep/karya tradisional tradisi setempat)",
+            capaian: "Mendukung pemahaman sejarah lokal dan antropologi (IPS), penguasaan literasi teks eksposisi tradisi (Bahasa Indonesia), serta apresiasi seni rupa/musik (Seni Budaya).",
+            media: "Video Dokumenter Tradisi, Format LKPD Wawancara, Internet, Rumah Adat/Narasumber Setempat, Bahan Masak Tradisional.",
+            jAsesmen: "Asesmen Awal Pemetaan Pengetahuan Tradisi, Formatif Proses Observasi Riset, Sumatif Performa Gelar Karya Seni/Kuliner.",
+            iAsesmen: "Lembar Observasi Keaktifan Wawancara, Rubrik Penilaian Performa/Produk Kuliner, Jurnal Refleksi, Portofolio Dokumentasi.",
+            produk: "Laporan Riset Budaya, Kliping Warisan Kuliner Khas, Video Dokumentasi Wawancara Maestro, Pameran Gelar Budaya.",
+            aktivitas: "Pertemuan 1 (Pengenalan): Pemutaran dokumenter kesenian daerah yang hampir punah, diskusi kelompok mengenai identitas budaya diri.\nPertemuan 2 (Eksplorasi): Kunjungan ke tokoh adat atau museum lokal, wawancara maestro budaya, pencatatan resep/pakem seni asli.\nPertemuan 3 (Aksi/Karya): Praktik langsung memasak kuliner tradisional atau latihan performa seni, persiapan stan gelar karya.\nPertemuan 4 (Refleksi & Tindak Lanjut): Pentas seni mini kokurikuler, evaluasi rasa bangga kebudayaan, rencana pembuatan vlog edukasi warisan budaya.",
+            budaya: "Menumbuhkan sikap hormat dan santun (tata krama lokal), bangga menggunakan bahasa daerah yang baik pada waktu tertentu, serta apresiasi tinggi terhadap kesenian asli daerah.",
+            refSiswa: "1. Mengapa warisan tradisi di daerahku penting untuk dijaga?\n2. Hal menarik apa yang aku temukan saat mewawancarai narasumber adat?\n3. Tantangan apa yang aku rasakan ketika mempraktikkan seni/kuliner khas?",
+            refGuru: "1. Apakah peserta didik merasa bangga dengan keunikan budaya aslinya?\n2. Bagaimana keterlibatan narasumber lokal dalam membantu pemahaman siswa?\n3. Apakah asesmen performa sudah mengukur orisinalitas karya siswa?",
+            lampiranTxt: "Buku Panduan Angket Adat & Resep Kuliner Tradisional",
+            jadwal: [
+                { jp: "4 JP", agenda: "Tahap Pengenalan: Eksplorasi keragaman budaya asli daerah" },
+                { jp: "6 JP", agenda: "Tahap Eksplorasi: Wawancara maestro & kunjungan situs budaya" },
+                { jp: "10 JP", agenda: "Tahap Aksi: Praktik pengolahan kuliner & gladi gelar karya seni" },
+                { jp: "4 JP", agenda: "Tahap Refleksi: Evaluasi pameran budaya & rencana pelestarian" }
+            ]
+        },
+        "Bhinneka Tunggal Ika": {
+            judul: "Harmoni dalam Keberagaman: Merayakan Toleransi di Lingkungan Sekolah",
+            latar: "Keragaman suku, agama, dan latar belakang sosial peserta didik di lingkungan sekolah menuntut adanya pemahaman toleransi yang mendalam. Projek ini disusun untuk memfasilitasi ruang komunikasi dan kerja sama yang inklusif antarmurid. Hal ini mendukung penuh visi sekolah dalam menciptakan ekosistem belajar yang aman, nyaman, dan saling menghargai. Relevansi sosial di lingkungan masyarakat heterogen saat ini menuntut penguatan nilai persatuan sejak dini demi meminimalisir konflik sosial.",
+            topik: "Merajut Persatuan dan Menghapus Stereotip Negatif di Sekolah",
+            tujuanKhusus: "Membangun kesadaran anti-perundungan (bullying), melatih empati sosial lintas latar belakang, dan mengasah keterampilan mediasi konflik sederhana.",
+            tujuanAkhir: "1. Peserta didik mampu menunjukkan sikap menghargai perbedaan suku, agama, budaya, dan latar belakang sosial.\n2. Peserta didik mampu membangun komunikasi dan kerja sama yang harmonis dalam keberagaman.\n3. Peserta didik mampu menerapkan nilai toleransi dan persatuan dalam kehidupan sekolah dan masyarakat.",
+            dimensi: "1. Berkebinekaan Global (Elemen: Berkeadilan sosial; Sub-elemen: Menghilangkan stereotip & prasangka)\n2. Gotong Royong (Elemen: Kepedulian; Sub-elemen: Tanggap terhadap lingkungan sosial sekolah)\n3. Bernalar Kritis (Elemen: Merefleksi pemikiran; Sub-elemen: Menganalisis penyebab intoleransi)",
+            capaian: "Mendukung penguatan materi hak asasi dan integrasi sosial (PPKn), penulisan teks pidato persuasif toleransi (Bahasa Indonesia), serta analisis statistik demografi kelas (Matematika).",
+            media: "Video Studi Kasus Sosial, LKPD Studi Kasus Inklusi, Internet, Komunitas Sekolah, Poster Anti-Bullying.",
+            jAsesmen: "Asesmen Diagnostik Indeks Toleransi Awal, Formatif Proses Keaktifan Diskusi Emosi, Sumatif Kampanye Kolaboratif Inklusif.",
+            iAsesmen: "Lembar Observasi Sikap Toleransi Sosial, Rubrik Penilaian Kampanye Media, Jurnal Pribadi, Portofolio Karya Kampanye.",
+            produk: "Mading Kebinekaan Kreatif, Ikrar Komitmen Bersama Seluruh Siswa, Video Kampanye Inklusi Sosial, Pameran Atribut Kebudayaan.",
+            aktivitas: "Pertemuan 1 (Pengenalan): Analisis kasus sosial mengenai dampak intoleransi, permainan peran (role-play) bertema keberagaman.\nPertemuan 2 (Eksplorasi): Diskusi panel antar-perwakilan kelas mengenai keunikan latar belakang masing-masing, pemetaan potensi konflik sekolah.\nPertemuan 3 (Aksi/Karya): Pembuatan majalah dinding (mading) toleransi, deklarasi damai komitmen bersama anti-diskriminasi.\nPertemuan 4 (Refleksi & Tindak Lanjut): Forum curah jantung (sharing session) berkala tentang kedamaian kelas, pembentukan agen perdamaian sekolah.",
+            budaya: "Penguatan budaya inklusif (anti-perundungan/bullying), pembiasaan berkolaborasi tanpa membeda-bedakan latar belakang, serta penggunaan bahasa tutur yang suportif dan empatik.",
+            refSiswa: "1. Pernahkah aku tanpa sengaja membuat prasangka buruk pada teman?\n2. Apa yang harus aku lakukan jika melihat tindakan perundungan di sekolah?\n3. Bagaimana perasaanku setelah berkolaborasi dalam kelompok yang heterogen?",
+            refGuru: "1. Sejauh mana pemahaman siswa terhadap bahaya laten stereotip sosial?\n2. Apakah dinamika kelompok berjalan inklusif tanpa ada siswa yang terisolasi?\n3. Bagaimana merancang tindak lanjut sistem pengaduan perundungan?",
+            lampiranTxt: "Panduan Modul Anti-Bullying & Angket Iklim Toleransi",
+            jadwal: [
+                { jp: "4 JP", agenda: "Tahap Pengenalan: Pemetaan prasangka & dinamika sosiometri kelas" },
+                { jp: "6 JP", agenda: "Tahap Eksplorasi: Diskusi panel inklusif lintas latar belakang" },
+                { jp: "8 JP", agenda: "Tahap Aksi: Deklarasi anti-bullying & perancangan mading kolosal" },
+                { jp: "4 JP", agenda: "Tahap Refleksi: Evaluasi forum curah jantung harian kedamaian kelas" }
+            ]
+        },
+        "Bangunlah Jiwa dan Raganya": {
+            judul: "Sehat Fisik Sehat Mental: Pembiasaan Pola Hidup Sehat Generasi Masa Kini",
+            latar: "Tantangan kesehatan mental remaja serta maraknya gaya hidup tidak sehat (sedentary lifestyle) melatarbelakangi pentingnya projek ini dilaksanakan bagi peserta didik. Melalui program olahraga terukur dan edukasi pengendalian diri, sekolah berupaya membangun disiplin positif. Kegiatan ini selaras dengan visi-misi sekolah yang menekankan keseimbangan kecerdasan intelektual, emosional, dan kesehatan fisik. Sangat relevan dengan kebutuhan lingkungan masa kini yang menuntut kesiapan kebugaran tubuh serta ketahanan psikologis murid.",
+            topik: "Mengelola Kesejahteraan Diri Melalui Olahraga dan Regulasi Emosi",
+            tujuanKhusus: "Melatih siswa menyusun menu gizi seimbang, mempraktikkan teknik manajemen stres (mindfulness), serta memperkuat kedisiplinan harian.",
+            tujuanAkhir: "1. Peserta didik mampu menerapkan pola hidup sehat untuk menjaga kesehatan fisik dan mental.\n2. Peserta didik mampu menunjukkan perilaku disiplin, tanggung jawab, dan pengendalian diri dalam kehidupan sehari-hari.\n3. Peserta didik mampu membangun kebiasaan positif yang mendukung kesejahteraan diri dan lingkungan.",
+            dimensi: "1. Mandiri (Elemen: Regulasi diri; Sub-elemen: Mengendalikan emosi & menyusun rencana sehat)\n2. Beriman & Berakhlak Mulia (Elemen: Akhlak pribadi; Sub-elemen: Merawat integritas kesehatan jasmani/rohani)\n3. Gotong Royong (Elemen: Kolaborasi; Sub-elemen: Kekompakan aktivitas olahraga tim)",
+            capaian: "Mendukung penguatan materi kesehatan reproduksi dan kebugaran (PJOK), perhitungan kalori dan gizi makanan (IPA/Kimia), serta penulisan jurnal refleksi emosional (Bimbingan Konseling).",
+            media: "Video Panduan Regulasi Emosi, LKPD Tracker Menu Gizi harian, Internet, Alat Ukur Berat/Tinggi, Ruang Terbuka Hijau.",
+            jAsesmen: "Asesmen Kesiapan Fisik-Mental Awal, Formatif Isian Jurnal Harian Kebiasaan, Sumatif Performa Senam Kreasi & Infografis Gizi.",
+            iAsesmen: "Lembar Observasi Disiplin Latihan, Rubrik Penilaian Infografis Edukatif, Jurnal Evaluasi Mood, Portofolio Jurnal.",
+            produk: "Jurnal Tracker Pola Hidup Sehat 30 Hari, Infografis Gizi Seimbang Remaja, Video Gerakan Senam Kreasi Kelompok.",
+            aktivitas: "Pertemuan 1 (Pengenalan): Seminar interaktif bersama psikolog/tenaga medis mengenai kesehatan mental remaja dan bahaya makanan cepat saji.\nPertemuan 2 (Eksplorasi): Pencatatan jurnal kesehatan pribadi (pola tidur, konsumsi air, mood), analisis kebiasaan buruk harian.\nPertemuan 3 (Aksi/Karya): Praktik senam kebugaran jasmani kreasi mandiri, penyusunan infografis kampanye kesehatan mental di media sosial.\nPertemuan 4 (Refleksi & Tindak Lanjut): Pengukuran kebugaran pasca-projek, evaluasi kestabilan emosi, pembiasaan minum air putih massal.",
+            budaya: "Pembiasaan kebugaran jasmani (senam/peregangan berkala), kampanye bekal makan sehat bebas pengawet, serta penyediaan ruang curhat/konseling teman sebaya yang nyaman.",
+            refSiswa: "1. Apakah aku sudah mengelola stres belajar dengan cara yang positif?\n2. Perubahan fisik apa yang aku rasakan setelah rutin berolahraga?\n3. Apakah makanan yang aku konsumsi hari ini sudah memenuhi kriteria gizi seimbang?",
+            refGuru: "1. Apakah siswa terbuka mengutarakan kondisi emosionalnya selama projek?\n2. Bagaimana tingkat kedisiplinan pengisian jurnal tracker kesehatan siswa?\n3. Apakah aktivitas fisik kelompok sudah berjalan dengan aman?",
+            lampiranTxt: "Tabel Konversi Kalori & Panduan Relaksasi Otot",
+            jadwal: [
+                { jp: "4 JP", agenda: "Tahap Pengenalan: Seminar kesehatan mental & gizi buruk remaja" },
+                { jp: "6 JP", agenda: "Tahap Eksplorasi: Pengisian tracker harian kalori & pola tidur" },
+                { jp: "8 JP", agenda: "Tahap Aksi: Latihan berkala senam kreasi & workshop gizi" },
+                { jp: "4 JP", agenda: "Tahap Refleksi: Pengukuran indeks kebugaran & post-test emosional" }
+            ]
+        },
+        "Suara Demokrasi": {
+            judul: "Suaraku Masa Depanku: Simulasi Pemilihan Organisasi Siswa yang Berintegritas",
+            latar: "Peserta didik memerlukan wadah kontekstual untuk mempelajari prinsip kepemimpinan, musyawarah, dan penyampaian pendapat secara bertanggung jawab. Sekolah mengimplementasikan projek ini melalui momentum pemilihan organisasi siswa sebagai laboratorium demokrasi mini. Projek ini merealisasikan misi sekolah untuk mencetak kader pemimpin masa depan yang adil dan transparan. Relevansi sosialnya sangat tinggi dalam membentuk kesadaran berwarganegara yang taat asas hukum dan mengutamakan mufakat.",
+            topik: "Penerapan Prinsip Musyawarah dan Pemilu Bersih Berintegritas",
+            tujuanKhusus: "Mengembangkan keterampilan orasi publik yang santun, pemahaman tata cara pemungutan suara, dan sportivitas menerima hasil keputusan bersama.",
+            tujuanAkhir: "1. Peserta didik mampu menyampaikan pendapat secara santun, logis, dan bertanggung jawab.\n2. Peserta didik mampu menerapkan prinsip musyawarah dan pengambilan keputusan bersama.\n3. Peserta didik mampu menunjukkan sikap kepemimpinan dan partisipasi aktif dalam kegiatan sekolah.",
+            dimensi: "1. Bernalar Kritis (Elemen: Menganalisis argumen; Sub-elemen: Mengevaluasi visi-misi calon secara objektif)\n2. Berkebinekaan Global (Elemen: Berkeadilan sosial; Sub-elemen: Berpartisipasi aktif dalam proses pengambilan keputusan umum)\n3. Gotong Royong (Elemen: Kolaborasi; Sub-elemen: Kerja sama kepanitiaan pemilu kelas)",
+            capaian: "Mendukung penguatan pemahaman hak pilih dan sistem pemerintahan tata negara (PPKn), keterampilan public speaking orasi politik (Bahasa Indonesia), serta sistem pengolahan data statistik suara (Matematika).",
+            media: "Video Panduan Pemilu Bersih KPK, format LKPD Visi-Misi, Internet, Kotak dan Bilik Suara Atribut Simulasi, Lembar Surat Suara.",
+            jAsesmen: "Asesmen Pengetahuan Dasar Tata Kelola Pemilu, Formatif Proses Keterlibatan Panitia/Orasi, Sumatif Performa Simulasi Voting.",
+            iAsesmen: "Lembar Observasi Etika Berdiskusi/Debat, Rubrik Penilaian Orasi Visi-Misi, Jurnal Harian Kampanye, Portofolio Logistik Pemilu.",
+            produk: "Draf Struktur Visi-Misi Kandidat, Desain Atribut Kampanye Kreatif, Laporan Berita Acara Perhitungan Suara, Maket TPS Inovatif.",
+            aktivitas: "Pertemuan 1 (Pengenalan): Kuliah umum tata cara berdemokrasi, bedah struktur organisasi sekolah, diskusi etika menyampaikan kritik.\nPertemuan 2 (Eksplorasi): Penyusunan visi-misi kandidat ketua, debat terbuka antar-calon pemimpin kelompok, pencarian solusi isu internal sekolah.\nPertemuan 3 (Aksi/Karya): Pelaksanaan simulasi pemungutan suara secara berkala menggunakan bilik suara buatan, penghitungan suara transparan.\nPertemuan 4 (Refleksi & Tindak Lanjut): Evaluasi jalannya pemilu, penandatanganan pakta integritas bersama, latihan kepemimpinan dasar.",
+            budaya: "Budaya musyawarah mufakat di kelas, kebebasan berpendapat secara sehat dan sopan tanpa intimidasi, serta membiasakan sikap berlapang dada menerima hasil voting bersama.",
+            refSiswa: "1. Bagaimana caraku menanggapi pendapat teman yang bertolak belakang denganku?\n2. Apakah aku sudah menjadi pemilih yang rasional dan objektif?\n3. Apa esensi dari sebuah integritas dalam proses pemilihan pemimpin?",
+            refGuru: "1. Apakah debat visi-misi berjalan dengan kondusif dan menjunjung etika?\n2. Seberapa mandiri siswa mengorganisir logistik simulasi pemungutan suara?\n3. Bagaimana memantau netralitas fasilitator selama projek?",
+            lampiranTxt: "Draf Contoh Tata Tertib Debat & Berita Acara KPPS",
+            jadwal: [
+                { jp: "4 JP", agenda: "Tahap Pengenalan: Tata kelola organisasi & etika mengemukakan kritik" },
+                { jp: "6 JP", agenda: "Tahap Eksplorasi: Penyusunan draf kerja visi-misi & debat publik kandidat" },
+                { jp: "8 JP", agenda: "Tahap Aksi: Simulasi pemungutan suara & rekapitulasi data TPS" },
+                { jp: "4 JP", agenda: "Tahap Refleksi: Pakta integritas pengurus baru & evaluasi sistem pemilu" }
+            ]
+        },
+        "Berekayasa dan Berteknologi untuk Membangun NKRI": {
+            judul: "Inovasi Masa Depan: Merancang Prototipe Teknologi Tepat Guna Solutif",
+            latar: "Perkembangan era digital menuntut peserta didik tidak hanya menjadi konsumen teknologi, tetapi juga inovator solusi kreatif. Sekolah memanfaatkan fasilitas penunjang untuk mendorong murid mengidentifikasi masalah lingkungan lalu merancang rekayasa teknologi sederhana. Projek ini sejalan dengan komitmen visi sekolah terhadap kemajuan iptek dan kreativitas inovatif. Sangat relevan dengan kebutuhan lingkungan sekitar yang membutuhkan sentuhan teknologi tepat guna untuk efisiensi aktivitas harian.",
+            topik: "Rekayasa Inovatif Berbasis Teknologi Sederhana Berkelanjutan",
+            tujuanKhusus: "Mengasah kemampuan berpikir komputasional (computational thinking), pemecahan masalah (problem solving), serta keterampilan dasar perakitan produk solutif.",
+            tujuanAkhir: "1. Peserta didik mampu mengidentifikasi permasalahan dan merancang solusi melalui pendekatan teknologi dan inovasi.\n2. Peserta didik mampu menghasilkan karya atau produk sederhana berbasis kreativitas dan teknologi.\n3. Peserta didik mampu menggunakan teknologi secara bertanggung jawab dan bermanfaat.",
+            dimensi: "1. Kreatif (Elemen: Keluwesan berpikir; Sub-elemen: Mencari alternatif solusi rekayasa mekanik/digital)\n2. Bernalar Kritis (Elemen: Memproses gagasan; Sub-elemen: Mengidentifikasi masalah fisik lingkungan sekitar)\n3. Mandiri (Elemen: Pemahaman diri; Sub-elemen: Percaya diri mencoba perakitan produk inovasi baru)",
+            capaian: "Mendukung kompetensi perakitan rangkaian listrik/elektronika dasar (Fisika/IPA), logika algoritma sistem pemecahan masalah (Informatika), serta penyusunan teks laporan ilmiah teknik pembuatan alat (Bahasa Indonesia).",
+            media: "Video Tutorial Rangkaian Inovatif, Lembar Sketsa Kerja LKPD, Internet, Kit Komponen Elektronika Dasar, Perkakas Kerja Sekolah.",
+            jAsesmen: "Asesmen Awal Pemetaan Keterampilan Logika, Formatif Monitoring Perakitan Alat, Sumatif Uji Keandalan Prototipe Produk.",
+            iAsesmen: "Lembar Observasi Aspek Keselamatan Kerja, Rubrik Desain & Fungsionalitas Alat, Jurnal Kendala Teknik, Portofolio Sketsa.",
+            produk: "Sketsa Desain Gambar Teknik, Prototipe Alat Penjernih/Lampu Sensor/Kompos Otomatis, Laporan Hasil Uji Fungsi Alat.",
+            aktivitas: "Pertemuan 1 (Pengenalan): Robinson Crusoe rekayasa alat tepat guna pemecah masalah, pengenalan tools/software desain dasar.\nPertemuan 2 (Eksplorasi): Mapping kendala fisik sekolah (misal: penyiraman tanaman manual, kegelapan lorong), pembuatan draf sketsa sirkuit/alat.\nPertemuan 3 (Aksi/Karya): Perakitan prototipe (misal: penjernih air portable, lampu otomatis sensor cahaya) menggunakan bahan daur ulang.\nPertemuan 4 (Refleksi & Tindak Lanjut): Uji coba keandalan produk di depan panel guru, perbaikan bug/cacat desain, dokumentasi manual buku.",
+            budaya: "Menumbuhkan etos kerja ilmiah, budaya keselamatan kerja (K3), apresiasi terhadap trial and error (pantang menyerah), serta bijak dan etis dalam memanfaatkan perangkat teknologi digital.",
+            refSiswa: "1. Apa solusi teknologi alternatif jika komponen utama kelompokku gagal berfungsi?\n2. Bagaimana alat rekayasa yang kami buat ini membantu meringankan beban orang lain?\n3. Apakah aku sudah berhati-hati menggunakan perkakas kerja tajam/listrik?",
+            refGuru: "1. Apakah alokasi waktu perakitan mencukupi bagi siswa pemula?\n2. Bagaimana respons siswa ketika menghadapi kegagalan fungsi alat pertamanya?\n3. Apakah standar keselamatan kerja sudah dipatuhi sepenuhnya?",
+            lampiranTxt: "Manual Prosedur Keselamatan Kerja Alat (K3 Elektronika)",
+            jadwal: [
+                { jp: "4 JP", agenda: "Tahap Pengenalan: Logika berpikir komputasional & pengenalan tools" },
+                { jp: "6 JP", agenda: "Tahap Eksplorasi: Observasi titik kendala infrastruktur & gambar sketsa" },
+                { jp: "12 JP", agenda: "Tahap Aksi: Perakitan prototipe mekanik/elektronik di ruang kerja" },
+                { jp: "4 JP", agenda: "Tahap Refleksi: Pengujian fungsi alat & evaluasi cacat produk teknik" }
+            ]
+        },
+        "Kewirausahaan": {
+            judul: "Kreativitas Berdaya Jual: Membuat Produk Bernilai Guna dari Bahan Sekitar",
+            latar: "Membangun kemandirian finansial, kedisiplinan, dan mental pantang menyerah menjadi kebutuhan esensial bagi masa depan peserta didik. Sekolah merancang ruang eksperimen produksi hingga pemasaran sederhana guna memantik jiwa wirausaha murid. Kegiatan ini menerjemahkan misi sekolah dalam aspek pembentukan keterampilan hidup (life skills) yang kreatif. Hal ini sangat relevan dengan dinamika ekonomi lingkungan masyarakat lokal yang bergerak dinamis pada sektor industri kreatif.",
+            topik: "Perencanaan Bisnis Kreatif Mandiri Skala Mikro",
+            tujuanKhusus: "Melatih kemampuan menghitung harga pokok penjualan (HPP), menyusun strategi promosi digital, serta menumbuhkan etika pelayanan pelanggan.",
+            tujuanAkhir: "1. Peserta didik mampu menunjukkan kreativitas dalam menghasilkan ide dan produk yang bernilai guna.\n2. Peserta didik mampu memahami dasar perencanaan, produksi, dan pemasaran sederhana.\n3. Peserta didik mampu membangun sikap mandiri, disiplin, dan bertanggung jawab dalam kegiatan usaha.",
+            dimensi: "1. Kreatif (Elemen: Gagasan orisinal; Sub-elemen: Merancang konsep komersial produk unik)\n2. Mandiri (Elemen: Regulasi diri; Sub-elemen: Mengelola waktu produksi secara tertata dan presisi)\n3. Gotong Royong (Elemen: Kolaborasi; Sub-elemen: Pembagian peran tim penjualan & keuangan)",
+            capaian: "Mendukung materi perhitungan untung-rugi modal (Matematika), analisis strategi pemasaran ekonomi (IPS), serta kemampuan copywriting promosi katalog niaga (Bahasa Indonesia).",
+            media: "Video Studi Kasus UMKM Kreatif, LKPD Business Model Canvas, Internet, Stand Meja Bazar Karya, Bahan Baku Produksi Mandiri.",
+            jAsesmen: "Asesmen Pemahaman Ide Bisnis Awal, Formatif Pengawasan Proses Produksi Higienis, Sumatif Laba/Rugi Omset Bazar Market Day.",
+            iAsesmen: "Lembar Observasi Keterampilan Komunikasi Pelanggan, Rubrik Analisis Proposal Bisnis, Jurnal Kas Keuangan, Portofolio Produk.",
+            produk: "Lembar Proposal Bisnis Kelompok, Desain Kemasan & Logo Produk Menarik, Stand Pameran Hasil Produksi, Laporan Keuangan Neraca.",
+            aktivitas: "Pertemuan 1 (Pengenalan): Seminar kewirausahaan, analisis peluang pasar di lingkungan sekolah, penentuan ide produk unik kelompok.\nPertemuan 2 (Eksplorasi): Penyusunan proposal usaha sederhana, perhitungan modal awal, uji coba resep/pembuatan sampel produk awal.\nPertemuan 3 (Aksi/Karya): Produksi massal produk higienis/bernilai guna, pelaksanaan Market Day (gelar pasar karya) di halaman sekolah.\nPertemuan 4 (Refleksi & Tindak Lanjut): Penghitungan laba-rugi riil, analisis kepuasan konsumen, penyusunan rencana pengembangan usaha.",
+            budaya: "Menumbuhkan budaya kejujuran transaksi (anti-korupsi skala mikro), kerja keras, pelayanan prima dan ramah 5S kepada konsumen, serta manajemen pengelolaan modal keuangan yang rapi.",
+            refSiswa: "1. Bagaimana perasaanku saat menghadapi penolakan barang dagangan oleh pembeli?\n2. Apakah catatan laba-rugi kelompokku sudah ditulis secara jujur dan transparan?\n3. Strategi kreatif apa yang paling efektif mendatangkan banyak pembeli?",
+            refGuru: "1. Apakah kepemimpinan dalam pembagian tugas kelompok bisnis berjalan seimbang?\n2. Seberapa efektif pelaksanaan Market Day dalam mengasah nyali wirausaha murid?\n3. Bagaimana memitigasi kerugian finansial yang mungkin timbul pada kelompok?",
+            lampiranTxt: "Format Nota Penjualan & Buku Kas Keuangan Pasar",
+            jadwal: [
+                { jp: "4 JP", agenda: "Tahap Pengenalan: Pemetaan ide peluang bisnis & analisis target pasar" },
+                { jp: "6 JP", agenda: "Tahap Eksplorasi: Pembuatan Business Model Canvas & uji resep sampel" },
+                { jp: "10 JP", agenda: "Tahap Aksi: Produksi massal komersial & pelaksanaan event Market Day" },
+                { jp: "4 JP", agenda: "Tahap Refleksi: Audit laporan laba-rugi riil & analisis retensi konsumen" }
+            ]
+        },
+        "Kebekerjaan (Khusus SMK)": {
+            judul: "Kesiapan Karier: Membangun Etika Kerja dan Profesionalisme di Dunia Industri",
+            latar: "Kebutuhan penyelarasan (link and match) antara kompetensi sekolah dengan ekspektasi Dunia Usaha dan Dunia Industri (DUDI) melatarbelakangi projek kebekerjaan ini. Peserta didik dilatih mengenali potensi diri, etika profesi, serta kedisiplinan tinggi. Langkah ini searah dengan visi utama sekolah dalam mencetak lulusan siap kerja yang unggul dan kompetitif. Relevansi lingkungan industri global menuntut adaptabilitas tinggi serta kesiapan mental karir yang matang.",
+            topik: "Pemetaan Keterampilan Masa Depan dan Internalisasi Etika Kerja",
+            tujuanKhusus: "Melatih siswa membuat Curriculum Vitae (CV) standar industri, mempraktikkan simulasi wawancara kerja, dan kedisiplinan operasional kerja baku.",
+            tujuanAkhir: "1. Peserta didik mampu mengenali potensi diri, minat, dan keterampilan untuk perencanaan masa depan.\n2. Peserta didik mampu menunjukkan etika, tanggung jawab, dan disiplin dalam menyelesaikan tugas.\n3. Peserta didik mampu membangun kesiapan menghadapi tantangan pendidikan lanjutan dan dunia kerja.",
+            dimensi: "1. Mandiri (Elemen: Pemahaman diri; Sub-elemen: Menilai kelemahan & kelebihan kompetensi diri profesi)\n2. Bernalar Kritis (Elemen: Memproses data; Sub-elemen: Menganalisis tren kualifikasi kebutuhan industri kerja)\n3. Kreatif (Elemen: Karya orisinal; Sub-elemen: Mendesain portofolio resume personal branding)",
+            capaian: "Mendukung penguatan etika komunikasi perkantoran profesional (Bahasa Indonesia/Inggris), adaptasi ekosistem korporat industri (IPS/Sosiologi), serta pemanfaatan aplikasi pengolah dokumen karir (Informatika).",
+            media: "Video Simulasi Wawancara Kerja HRD, Contoh Format CV Kreatif LKPD, Aplikasi Canva/LinkedIn Internet, Ruang Simulasi Kerja.",
+            jAsesmen: "Asesmen Minat Bakat Karir Siswa, Formatif Reviu Draft Berkas CV Kelompok, Sumatif Performa Wawancara Kerja.",
+            iAsesmen: "Lembar Observasi Etika Berbusana & Gesture, Rubrik Kelayakan Struktur Portofolio CV, Jurnal Evaluasi Kerja, Portofolio Dokumen.",
+            produk: "Berkas CV Kreatif & Surat Lamaran Profesional, Akun LinkedIn Siap Kerja, Berkas Video Portofolio Diri, Laporan Perencanaan Karier.",
+            aktivitas: "Pertemuan 1 (Pengenalan): Kuliah umum praktisi HRD dari industri mitra, asesmen mandiri bakat minat menggunakan psikotes sederhana.\nPertemuan 2 (Eksplorasi): Analisis portofolio diri, workshop penyusunan resume kerja/portofolio digital berbasis pencapaian nyata.\nPertemuan 3 (Aksi/Karya): Role-play simulasi wawancara kerja (mock interview) berpasangan, praktik pengerjaan tugas sesuai deadline ketat industri.\nPertemuan 4 (Refleksi & Tindak Lanjut): Evaluasi kesiapan mental bursa kerja, perbaikan draf perencanaan karier jangka panjang 5 tahun ke depan.",
+            budaya: "Budaya ketepatan waktu (zero tolerance for tardiness), integrity profesional, etika berpakaian rapi standar korporat, serta tata krama tata bahasa berkomunikasi formal dunia kerja.",
+            refSiswa: "1. Apa saja kelemahan kompetensi diriku yang wajib segera aku perbaiki demi industri?\n2. Apakah aku sudah mampu berkomunikasi secara meyakinkan saat wawancara?\n3. Bagaimana caraku beradaptasi dengan tekanan deadline kerja?",
+            refGuru: "1. Seberapa jauh kesenjangan antara draf portofolio siswa dengan standar DUDI nyata?\n2. Kendala mental apa yang paling banyak dihadapi siswa saat simulasi interview?\n3. Apakah industri mitra memberikan feedback konstruktif bagi modul?",
+            lampiranTxt: "Daftar Cek Kelayakan Berkas Lamaran Kerja & Rubrik CV",
+            jadwal: [
+                { jp: "4 JP", agenda: "Tahap Pengenalan: Pemetaan kompetensi karir DUDI & tes psikometrik" },
+                { jp: "6 JP", agenda: "Tahap Eksplorasi: Penyusunan resume resume kerja & profil digital LinkedIn" },
+                { jp: "12 JP", agenda: "Tahap Aksi: Pelaksanaan mock interview terstruktur bersama praktisi" },
+                { jp: "4 JP", agenda: "Tahap Refleksi: Review draf rencana peta karir jangka panjang 5 tahun" }
+            ]
+        },
+        "Tema Khusus Karakteristik Sekolah": {
+            judul: "Penguatan Karakter Unggulan: Menginternalisasi Visi Khusus Budaya Sekolah",
+            latar: "Setiap satuan pendidikan memiliki identitas khusus (seperti berbasis religi, adiwiyata, atau ramah anak) yang menjadi keunggulan mutlak. Projek ini didesain agar peserta didik mampu mengaplikasikan pembiasaan positif sesuai dengan kekhasan lembaga tersebut. Hal ini secara langsung mengakar pada visi utama pengembangan sekolah. Kegiatan ini relevan dengan tuntutan masyarakat yang mendambakan output pendidikan berkarakter khusus dan konsisten menerapkan budaya positif harian.",
+            topik: "Internalisasi Nilai-Nilai Unggulan Guna Mencetak Identitas Positif Sekolah",
+            tujuanKhusus: "Menumbuhkan kebanggaan kolektif terhadap marwah sekolah, membiasakan tata krama khas lembaga, serta melahirkan karya berciri khas identitas sekolah.",
+            tujuanAkhir: "1. Peserta didik mampu menerapkan nilai-nilai unggulan sekolah dalam kehidupan sehari-hari.\n2. Peserta didik mampu berpartisipasi aktif dalam kegiatan yang mendukung budaya positif sekolah.\n3. Peserta didik mampu menghasilkan perilaku dan karya yang mencerminkan identitas serta visi sekolah.",
+            dimensi: "1. Beriman & Berakhlak Mulia (Elemen: Akhlak bernegara/sosial; Sub-elemen: Mengamalkan budaya sopan santun khas sekolah)\n2. Gotong Royong (Elemen: Kolaborasi; Sub-elemen: Menginisiasi gerakan ketertiban bersama di kelas)\n3. Bernalar Kritis (Elemen: Merefleksi gagasan; Sub-elemen: Mengevaluasi implementasi disiplin harian diri)",
+            capaian: "Mendukung penyerapan nilai spiritual-normatif aturan hukum sosial (PPKn/Agama), penulisan esai kritis tata krama lingkungan (Bahasa Indonesia), serta apresiasi tradisi lembaga (Seni/Sosiologi).",
+            media: "Buku Saku Tata Tertib/Visi Sekolah, LKPD Studi Kasus Perilaku, Internet, Sarana Area Publik Sekolah, Dokumentasi Foto Alumni.",
+            jAsesmen: "Asesmen Pemahaman Visi Lembaga Awal, Formatif Observasi Kepatuhan Pembiasaan Pagi, Sumatif Produk Karya/Aksi Kampanye Budaya.",
+            iAsesmen: "Lembar Observasi Jurnal Penilaian Karakter Harian, Rubrik Penilaian Hasil Produk Esai/Karya, Jurnal Kendala, Portofolio Perilaku.",
+            produk: "Buku Manifesto Komitmen Karakter Kelas, Poster Kampanye 5S (Senyum Sapa Salam Sopan Santun), Rekaman Audio Mars Sekolah.",
+            aktivitas: "Pertemuan 1 (Pengenalan): Sosialisasi sejarah perjuangan sekolah, bedah makna logo dan visi-misi bersama jajaran pimpinan lembaga.\nPertemuan 2 (Eksplorasi): Observasi penerapan pembiasaan karakter di area publik sekolah, pencarian gap/celah perilaku yang belum ideal.\nPertemuan 3 (Aksi/Karya): Pembuatan projek kolosal (misal: antologi tulisan karakter, pembuatan lagu/mars pembiasaan, gerakan disiplin ramah lingkungan).\nPertemuan 4 (Refleksi & Tindak Lanjut): Ikrar komitmen bersama pelaksana budaya positif, pemberian apresiasi (award) duta karakter sekolah.",
+            budaya: "Penguatan identitas khas sekolah secara total (misal: religiusitas, ketertiban lingkungan adiwiyata, atau ramah anak), serta internalisasi nilai historis dan kebanggaan almamater sekolah.",
+            refSiswa: "1. Bagaimana implementasi nyata visi sekolah dalam perilaku harian pribadiku?\n2. Apakah aku sudah menjadi contoh teladan yang baik bagi adik kelasku?\n3. Kontribusi nyata apa yang bisa aku berikan untuk mengharumkan nama sekolah?",
+            refGuru: "1. Apakah budaya positif sekolah ini sudah terinternalisasi atau sekadar kepatuhan semu?\n2. Apa kendala terbesar dalam menyelaraskan persepsi seluruh warga sekolah?\n3. Bagaimana merawat keberlanjutan aksi karakter unggulan ini?",
+            lampiranTxt: "Buku Saku Kode Etik Budaya Unggul Satuan Pendidikan",
+            jadwal: [
+                { jp: "4 JP", agenda: "Tahap Pengenalan: Bedah makna logo, visi, & esensi sejarah almamater" },
+                { jp: "6 JP", agenda: "Tahap Eksplorasi: Pemetaan gap perilaku di area publik lingkungan sekolah" },
+                { jp: "8 JP", agenda: "Tahap Aksi: Produksi berkas komitmen kelas & kampanye aksi 5S massal" },
+                { jp: "4 JP", agenda: "Tahap Refleksi: Inaugurasi duta karakter teladan & evaluasi konsistensi" }
+            ]
+        }
+    };
+
+    // Eksekusi perubahan seluruh komponen input secara serentak (Sinkronisasi Otomatis Total)
+    if (dataP5Master[temaPilihan]) {
+        inputJudul.value = dataP5Master[temaPilihan].judul;
+        inputLatarBelakang.value = dataP5Master[temaPilihan].latar;
+        inputTopikPembantu.value = dataP5Master[temaPilihan].topik;
+        inputTujuanKhusus.value = dataP5Master[temaPilihan].tujuanKhusus;
+        inputTujuanAkhir.value = dataP5Master[temaPilihan].tujuanAkhir;
+        inputDimensiElemen.value = dataP5Master[temaPilihan].dimensi;
+        inputCapaianDukung.value = dataP5Master[temaPilihan].capaian;
+        inputAktivitasPertemuan.value = dataP5Master[temaPilihan].aktivitas;
+        inputMediaAlat.value = dataP5Master[temaPilihan].media;
+        inputJenisAsesmen.value = dataP5Master[temaPilihan].jAsesmen;
+        inputInstrumenAsesmen.value = dataP5Master[temaPilihan].iAsesmen;
+        inputProdukKarya.value = dataP5Master[temaPilihan].produk;
+        
+        inputBudayaSekolah.value = dataP5Master[temaPilihan].budaya;
+        inputRefleksiSiswa.value = dataP5Master[temaPilihan].refSiswa;
+        inputRefleksiGuru.value = dataP5Master[temaPilihan].refGuru;
+        lblTambahan.innerText = dataP5Master[temaPilihan].lampiranTxt;
+
+        // --- SISTEM GENERATE TABEL JADWAL OTOMATIS BERDASARKAN TEMA ---
+        tabelJadwalBody.innerHTML = ""; // Hapus placeholder awal
+        dataP5Master[temaPilihan].jadwal.forEach((item, index) => {
+            const row = document.createElement("tr");
+            
+            // Kolom Pertemuan Ke-
+            const cellNo = document.createElement("td");
+            cellNo.className = "fw-semibold";
+            cellNo.innerText = index + 1;
+            row.appendChild(cellNo);
+            
+            // Kolom Tanggal Pelaksanaan (Input Date manual tetap dipertahaman)
+            const cellTanggal = document.createElement("td");
+            const inputDate = document.createElement("input");
+            inputDate.type = "date";
+            inputDate.className = "form-control form-control-sm";
+            cellTanggal.appendChild(inputDate);
+            row.appendChild(cellTanggal);
+            
+            // Kolom Durasi Waktu (Terisi Otomatis)
+            const cellJP = document.createElement("td");
+            const inputJP = document.createElement("input");
+            inputJP.type = "text";
+            inputJP.className = "form-control form-control-sm text-center";
+            inputJP.value = item.jp;
+            cellJP.appendChild(inputJP);
+            row.appendChild(cellJP);
+            
+            // Kolom Agenda / Alur Tahapan (Terisi Otomatis)
+            const cellAgenda = document.createElement("td");
+            const inputAgenda = document.createElement("input");
+            inputAgenda.type = "text";
+            inputAgenda.className = "form-control form-control-sm";
+            inputAgenda.value = item.agenda;
+            cellAgenda.appendChild(inputAgenda);
+            row.appendChild(cellAgenda);
+            
+            tabelJadwalBody.appendChild(row);
+        });
+    }
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

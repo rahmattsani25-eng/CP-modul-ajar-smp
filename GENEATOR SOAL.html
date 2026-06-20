@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Perintah Bank Soal Profesional</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: #1e3a8a;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        p.desc {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+        .section-title {
+            font-size: 1.1em;
+            color: #1e3a8a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #334155;
+            font-size: 0.95em;
+        }
+        textarea, select, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+        textarea:focus, select:focus, input:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        .Hasil-box {
+            margin-top: 30px;
+            background-color: #f0fff4;
+            border: 2px solid #bbf7d0;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        .btn-salin {
+            background-color: #059669;
+            margin-top: 10px;
+        }
+        .btn-salin:hover {
+            background-color: #047857;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🛠️ AI Quiz Prompt Generator (Versi Formal)</h2>
+    <p class="desc">Aplikasi penyusun instruksi pembuatan soal dilengkapi Kop Identitas Madrasah/Sekolah dan Tingkat Kelas.</p>
+    
+    <div class="section-title">I. Identitas Lembar Ujian</div>
+    <div class="grid-2">
+        <div class="form-group">
+            <label for="namaGuru">Nama Guru Pembuat:</label>
+            <input type="text" id="namaGuru" placeholder="Contoh: Ahmad Subarjo, S.Pd.">
+        </div>
+        <div class="form-group">
+            <label for="namaSekolah">Nama Sekolah / Madrasah:</label>
+            <input type="text" id="namaSekolah" placeholder="Contoh: SMA Negeri 1 Jakarta">
+        </div>
+    </div>
+    <div class="grid-2">
+        <div class="form-group">
+            <label for="mataPelajaran">Mata Pelajaran:</label>
+            <input type="text" id="mataPelajaran" placeholder="Contoh: Biologi / Sejarah Indonesia">
+        </div>
+        <div class="form-group">
+            <label for="kelas">Pilih Kelas:</label>
+            <select id="kelas">
+                <option value="" disabled selected>-- Pilih Kelas --</option>
+                <optgroup label="Sekolah Dasar (SD/MI)">
+                    <option value="Kelas 1 SD">Kelas 1</option>
+                    <option value="Kelas 2 SD">Kelas 2</option>
+                    <option value="Kelas 3 SD">Kelas 3</option>
+                    <option value="Kelas 4 SD">Kelas 4</option>
+                    <option value="Kelas 5 SD">Kelas 5</option>
+                    <option value="Kelas 6 SD">Kelas 6</option>
+                </optgroup>
+                <optgroup label="Sekolah Menengah Pertama (SMP/MTs)">
+                    <option value="Kelas 7 SMP">Kelas 7</option>
+                    <option value="Kelas 8 SMP">Kelas 8</option>
+                    <option value="Kelas 9 SMP">Kelas 9</option>
+                </optgroup>
+                <optgroup label="Sekolah Menengah Atas/Kejuruan (SMA/MA/SMK)">
+                    <option value="Kelas 10 SMA">Kelas 10</option>
+                    <option value="Kelas 11 SMA">Kelas 11</option>
+                    <option value="Kelas 12 SMA">Kelas 12</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+
+    <div class="section-title">II. Konten & Spesifikasi Soal</div>
+    <div class="form-group">
+        <label for="materi">Masukkan Materi Pelajaran / Teks Sumber:</label>
+        <textarea id="materi" rows="6" placeholder="Tempelkan teks rangkuman materi di sini..."></textarea>
+    </div>
+
+    <div class="grid-2">
+        <div class="form-group">
+            <label for="jenisSoal">Pilih Model/Jenis Soal:</label>
+            <select id="jenisSoal">
+                <option value="Soal HOTS (Higher Order Thinking Skills) Pilihan Ganda, menuntut kemampuan analisis (C4), evaluasi (C5), atau kreasi (C6) berdasarkan stimulus/kasus yang diberikan">Model Soal HOTS (Analisis & Kasus)</option>
+                <option value="Model Soal TKA (Tes Kemampuan Akademik) standar UTBK/SBMPTN dengan tingkat kesulitan tinggi, memerlukan logika analitis mendalam serta pemecahan masalah rumit">Model Soal TKA (Standar UTBK / PTN)</option>
+                <option value="Pilihan Ganda Biasa (4 opsi pilihan: A, B, C, D dengan hanya 1 jawaban benar)">Pilihan Ganda Biasa (Satu Jawaban Benar)</option>
+                <option value="Pilihan Ganda Kompleks (Siswa bisa memilih lebih dari satu jawaban benar, berikan instruksi 'Pilihlah semua jawaban yang benar')">Pilihan Ganda Kompleks (Jawaban Benar > 1)</option>
+                <option value="Benar atau Salah (True/False) disertai kolom ringkas untuk alasan/argumen siswa">Benar atau Salah (Dengan Alasan)</option>
+                <option value="Menjodohkan / Memasangkan (Buat dua daftar paralel: Kolom Pertanyaan/Pernyataan dan Kolom Jawaban Acak yang saling berhubungan)">Menjodohkan (Matching Test)</option>
+                <option value="Isian Singkat atau Teks Rumpang (Melengkapi kata kunci yang sengaja dihilangkan dari teks materi menggunakan model Drop-down)">Model Drop-down / Isian Rumpang</option>
+                <option value="Uraian / Essay Terbuka yang berbasis HOTS untuk menguji analisis mendalam siswa">Uraian / Essay Terbuka</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="jumlahSoal">Jumlah Soal:</label>
+            <input type="number" id="jumlahSoal" value="5" min="1" max="30">
+        </div>
+    </div>
+
+    <button onclick="buatInstruksi()">Generasikan Perintah Chat</button>
+
+    <div class="Hasil-box" id="hasilBox">
+        <label style="color: #15803d; font-weight: bold;">👉 Langkah Terakhir: Salin teks di bawah ini dan tempel (paste) ke Chat AI:</label>
+        <textarea id="teksPerintah" rows="8" readonly style="background-color: #ffffff; margin-top: 8px; border-color: #86efac; font-family: monospace; font-size: 0.9em;"></textarea>
+        <button class="btn-salin" onclick="salinTeks()">📋 Salin Perintah</button>
+    </div>
+</div>
+
+<script>
+function buatInstruksi() {
+    const namaGuru = document.getElementById('namaGuru').value || '[Nama Guru]';
+    const namaSekolah = document.getElementById('namaSekolah').value || '[Nama Sekolah]';
+    const mataPelajaran = document.getElementById('mataPelajaran').value || '[Mata Pelajaran]';
+    const kelas = document.getElementById('kelas').value;
+    const materi = document.getElementById('materi').value;
+    const jenisSoal = document.getElementById('jenisSoal').value;
+    const jumlahSoal = document.getElementById('jumlahSoal').value;
+    
+    if(!kelas) {
+        alert("Mohon pilih tingkatan kelas terlebih dahulu!");
+        return;
+    }
+    if(!materi.trim()) {
+        alert("Mohon isi kolom materi terlebih dahulu!");
+        return;
+    }
+
+    // Perintah terstruktur rapi dengan menyisipkan identitas formal sebagai Header
+    const templatePrompt = `Halo AI, bertindaklah sebagai Guru Ahli Pembuat Soal. Buatkan ${jumlahSoal} butir soal dengan "${jenisSoal}" yang disesuaikan untuk tingkat kesulitan "${kelas}".\n\nTolong buatkan output lembar ujian dengan format format KOP/Header formal seperti ini:\n\n=========================================\nLEMBAR BANK SOAL UTAMA\nSekolah: ${namaSekolah}\nMata Pelajaran: ${mataPelajaran}\nKelas/Semester: ${kelas}\nGuru Penyusun: ${namaGuru}\n=========================================\n\nKetentuan pembuatan konten soal:\n1. Tingkat kesulitan bahasa dan kedalaman materi harus tepat sasaran untuk anak ${kelas}.\n2. Soal harus berbobot tinggi, menghindari pertanyaan teks literal/hafalan mentah.\n3. Berikan "Petunjuk (Hint)" logika berpikir di setiap nomor soal.\n4. Cantumkan Kunci Jawaban yang valid.\n5. Berikan Pembahasan (Rationale) mendalam dan ilmiah.\n\nBerikut adalah materi pelajaran yang wajib Anda kelola menjadi soal:\n---\n${materi}\n---`;
+    
+    document.getElementById('teksPerintah').value = templatePrompt;
+    document.getElementById('hasilBox').style.display = "block";
+}
+
+function salinTeks() {
+    const copyText = document.getElementById("teksPerintah");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
+    alert("Perintah lengkap beridentitas berhasil disalin! Silakan tempel (Paste) ke ruang chat ini.");
+}
+</script>
+
+</body>
+</html>

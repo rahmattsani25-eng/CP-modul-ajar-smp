@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image & Video Prompt Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            max-width: 700px;
+            width: 100%;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 0;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 12px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #34495e;
+        }
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            background-color: #fafafa;
+        }
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            background-color: #fff;
+        }
+        textarea {
+            resize: vertical;
+            height: 85px;
+        }
+        .radio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+            transition: all 0.2s;
+        }
+        .radio-item:hover {
+            background: #eef2f7;
+        }
+        .btn-generate {
+            background-color: #3498db;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        .btn-generate:hover {
+            background-color: #2980b9;
+        }
+        .result-box {
+            margin-top: 25px;
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 6px solid #2ecc71;
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .result-title {
+            font-weight: bold;
+            color: #27ae60;
+            font-size: 15px;
+        }
+        .badge {
+            background-color: #27ae60;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .output-container {
+            margin-bottom: 15px;
+        }
+        .prompt-textarea {
+            font-family: 'Courier New', Courier, monospace;
+            background: #fff;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #2c3e50;
+            width: 100%;
+            height: 110px;
+            box-sizing: border-box;
+            resize: none;
+        }
+        .btn-copy {
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.2s;
+            margin-top: 5px;
+        }
+        .btn-copy:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>AI Image & Video Prompt Generator</h2>
+    
+    <div class="form-group">
+        <label for="nama">Nama Lengkap & Gelar (Contoh: dr. Zias Agesta):</label>
+        <input type="text" id="nama" placeholder="Masukkan nama yang akan tertera di papan nama/baju...">
+    </div>
+
+    <div class="form-group">
+        <label>Jenis Kelamin:</label>
+        <div class="radio-grid" style="grid-template-columns: 1fr 1fr;">
+            <label class="radio-item">
+                <input type="radio" name="gender" value="male" checked> Laki-laki
+            </label>
+            <label class="radio-item">
+                <input type="radio" name="gender" value="female"> Perempuan
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Pilihan Rentang Usia:</label>
+        <div class="radio-grid">
+            <label class="radio-item">
+                <input type="radio" name="usia" value="toddler_1"> Balita Berjalan (1-3 tahun)
+            </label>
+            <label class="radio-item">
+                <input type="radio" name="usia" value="kid_4"> Anak Kecil (4-11 tahun)
+            </label>
+            <label class="radio-item">
+                <input type="radio" name="usia" value="teenager"> Remaja (12-18 tahun)
+            </label>
+            <label class="radio-item">
+                <input type="radio" name="usia" value="young" checked> Dewasa Muda (19-30 tahun)
+            </label>
+            <label class="radio-item">
+                <input type="radio" name="usia" value="mature"> Matang / Mapan (31-45 tahun)
+            </label>
+            <label class="radio-item">
+                <input type="radio" name="usia" value="middle"> Paruh Baya (46-60 tahun)
+            </label>
+            <label class="radio-item">
+                <input type="radio" name="usia" value="elderly"> Lansia (60+ tahun)
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Orientasi Tampilan (Kamera):</label>
+        <div class="radio-grid" style="grid-template-columns: 1fr 1fr;">
+            <label class="radio-item">
+                <input type="radio" name="orientasi" value="portrait" checked> Portrait (Vertikal / HP)
+            </label>
+            <label class="radio-item">
+                <input type="radio" name="orientasi" value="landscape"> Landscape (Horizontal / PC / TV)
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="profesi">Pilih Profesi / Cita-Cita:</label>
+        <select id="profesi" onchange="updateSuasana()">
+            <optgroup label="Bidang Medis">
+                <option value="dokter_paru">Dokter Spesialis Paru-Paru (Pulmonologist)</option>
+                <option value="dokter_anak">Dokter Spesialis Anak (Pediatrician)</option>
+                <option value="dokter_umum">Dokter Umum / Bedah</option>
+            </optgroup>
+            <optgroup label="Agrikultur & Alam">
+                <option value="petani_modern">Petani Modern / Ahli Agronomi</option>
+                <option value="peternak_sukses">Peternak Sukses / Dokter Hewan</option>
+            </optgroup>
+            <optgroup label="Hukum, Bisnis & Pemerintahan">
+                <option value="ceo_bisnis">Pengusaha / CEO Korporasi</option>
+                <option value="tni_militer">Perwira TNI / Militer</option>
+                <option value="polisi">Perwira Polisi</option>
+                <option value="hakim_pengacara">Hakim / Jaksa / Pengacara</option>
+            </optgroup>
+            <optgroup label="Sains & Teknologi">
+                <option value="data_scientist">Ahli Komputer / Data Scientist</option>
+                <option value="arsitek">Arsitek / Desainer Gedung</option>
+                <option value="astronot">Astronot</option>
+            </optgroup>
+            <optgroup label="Penerbangan & Jasa">
+                <option value="pilot">Pilot Pesawat Komersial</option>
+                <option value="koki">Koki Profesional (Chef)</option>
+                <option value="guru_dosen">Guru / Dosen Profesional</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="suasana">Detail Suasana & Latar Belakang (Bahasa Indonesia):</label>
+        <textarea id="suasana">Di dalam ruang kerja klinik modern, mengenakan jas dokter putih dengan stetoskop di leher, latar belakang ada layar monitor menampilkan hasil rontgen paru-paru (X-ray), pencahayaan terang bersih medis.</textarea>
+    </div>
+
+    <button type="button" class="btn-generate" onclick="generatePromptAll()">Buat Prompt Gambar & Video ✨</button>
+
+    <div class="result-box" id="resultBox" style="display:none;">
+        <div class="output-container">
+            <div class="result-header">
+                <div class="result-title">1. Prompt Gambar (Midjourney / Leonardo / Bing)</div>
+                <span class="badge">IMAGE MODE</span>
+            </div>
+            <textarea id="outputPromptImg" class="prompt-textarea" readonly></textarea>
+            <button class="btn-copy" onclick="onlyCopyPrompt('outputPromptImg')">Salin Prompt Gambar 📋</button>
+        </div>
+
+        <div class="output-container" style="margin-top: 25px;">
+            <div class="result-header">
+                <div class="result-title">2. Prompt Video (Runway / Luma / Kling / Sora)</div>
+                <span class="badge" style="background-color: #3498db;">VIDEO MODE</span>
+            </div>
+            <textarea id="outputPromptVid" class="prompt-textarea" readonly></textarea>
+            <button class="btn-copy" style="background-color: #3498db;" onclick="onlyCopyPrompt('outputPromptVid')">Salin Prompt Video 🎬</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const templateProfesi = {
+        dokter_paru: {
+            titleEn: "pulmonologist doctor",
+            actionImg: "holding medical charts with a warm smile",
+            actionVid: "gently reviewing a lung X-ray on the screen, then turning toward the camera with a reassuring smile",
+            suasanaDefault: "Di dalam ruang kerja klinik modern, mengenakan jas dokter putih dengan stetoskop di leher, latar belakang ada layar monitor menampilkan hasil rontgen paru-paru (X-ray), pencahayaan terang bersih medis."
+        },
+        dokter_anak: {
+            titleEn: "pediatrician doctor",
+            actionImg: "smiling warmly while checking a plush toy, creating a playful ambiance",
+            actionVid: "playfully interacting and smiling with a cheerful expression, clean interior setting",
+            suasanaDefault: "Di dalam ruang klinik anak yang ramah dan penuh warna, tersenyum hangat, mengenakan jas lab dokter putih, menggendong bayi yang diselimuti kain lembut, atmosfer ceria."
+        },
+        dokter_umum: {
+            titleEn: "professional medical doctor",
+            actionImg: "standing proudly, stethoscopes over shoulders, confident look",
+            actionVid: "walking down the bright hospital corridor while holding a tablet computer, talking professionally",
+            suasanaDefault: "Berdiri di koridor rumah sakit yang modern dan bersih, mengenakan jas dokter putih dengan stetoskop, latar belakang ada perawat yang sedang blur (bokeh effect)."
+        },
+        petani_modern: {
+            titleEn: "modern successful farmer",
+            actionImg: "holding a digital tablet showing agricultural crop metrics, surrounded by lush vertical crops",
+            actionVid: "typing on a digital tablet, inspecting lush green automated hydroponic plants, foliage moving gently",
+            suasanaDefault: "Berdiri dengan bangga di dalam rumah kaca hidroponik (greenhouse) raksasa yang canggih, memegang komputer tablet yang menampilkan data pertumbuhan tanaman, mengenakan kemeja flanel rapi, dikelilingi tanaman hijau subur segar."
+        },
+        peternak_sukses: {
+            titleEn: "successful livestock entrepreneur",
+            actionImg: "standing proudly in front of clean automated cattle facilities",
+            actionVid: "walking through a high-tech automated dairy barn, checking mechanical feeders, looking satisfied",
+            suasanaDefault: "Berdiri di peternakan sapi perah modern yang sangat bersih dan rapi, mengenakan pakaian kerja lapangan kasual yang profesional, tersenyum percaya diri dengan latar belakang teknologi peternakan modern."
+        },
+        ceo_bisnis: {
+            titleEn: "corporate CEO and entrepreneur",
+            actionImg: "standing with hands in pockets, looking over the grand urban landscape confidently",
+            actionVid: "standing by the glass window, fixing the suit cuffs, slow cinematic panning showing the bustling city outside",
+            suasanaDefault: "Berdiri di dalam ruang rapat atau kantor lantai atas (penthouse office) gedung pencakar langit, mengenakan setelan jas formal hitam premium yang sangat pas (tailored suit) dengan dasi, latar belakang jendela kaca besar memperlihatkan pemandangan kota metropolitan."
+        },
+        tni_militer: {
+            titleEn: "military officer rank",
+            actionImg: "standing in perfect posture, saluting or looking serious and disciplined",
+            actionVid: "standing firm during a slow push-in zoom camera movement, flags behind rustling slightly under indoor ventilation",
+            suasanaDefault: "Mengenakan seragam dinas militer formal yang gagah lengkap dengan lencana penghargaan di dada, berdiri tegak dengan postur tegap berwibawa, latar belakang bendera nasional dan markas besar pangkalan militer yang rapi."
+        },
+        polisi: {
+            titleEn: "police officer",
+            actionImg: "standing with a confident posture, police department insignia clean and sharp",
+            actionVid: "looking into the lens with a resolute expression as emergency blue and red cinematic lights flash softly behind",
+            suasanaDefault: "Mengenakan seragam kepolisian formal yang rapi dan gagah, berdiri tegak, latar belakang gedung pusat kota yang bersih dengan efek pencahayaan sinematik yang dramatis."
+        },
+        hakim_pengacara: {
+            titleEn: "distinguished lawyer and judge",
+            actionImg: "holding legal books or official gavel, serious objective expression",
+            actionVid: "opening a premium leather law folder on a mahogany desk, looking up with an authoritative look",
+            suasanaDefault: "Berdiri di dalam ruang sidang pengadilan yang megah dengan dinding kayu klasik, mengenakan pakaian formal hukum/toga pengadilan yang berwibawa, memegang dokumen hukum, atmosfer tegas dan penuh keadilan."
+        },
+        data_scientist: {
+            titleEn: "expert computer scientist and data analyst",
+            actionImg: "typing on a sleek mechanical keyboard, code reflection on glasses",
+            actionVid: "analyzing holographic 3D analytical charts floating near the screen, neon ambient cyberpunk atmosphere",
+            suasanaDefault: "Duduk di depan meja kerja berteknologi tinggi dengan beberapa layar monitor lengkung besar (multi-monitor setup) yang menampilkan barisan kode pemrograman dan grafik data 3D holografik yang menyala, atmosfer cyberpunk modern."
+        },
+        arsitek: {
+            titleEn: "professional architect",
+            actionImg: "pointing over a physical complex architectural miniature model",
+            actionVid: "unrolling a detailed blueprint on the table, adjusting drafting tools, camera tilting downwards smoothly",
+            suasanaDefault: "Berdiri di studio desain yang estetik, memegang gulungan cetak biru (blueprint) bangunan, latar belakang meja gambar arsitektur dan miniatur maket gedung pencakar langit."
+        },
+        astronot: {
+            titleEn: "astronaut",
+            actionImg: "gazing peacefully through the space cupola window, cosmic lighting",
+            actionVid: "floating slowly inside the space station zero-gravity module, Earth rotating beautifully in the window background",
+            suasanaDefault: "Mengenakan pakaian luar angkasa (spacesuit) lengkap yang futuristik, berada di dalam stasiun luar angkasa dengan jendela besar yang memperlihatkan pemandangan planet Bumi yang indah."
+        },
+        pilot: {
+            titleEn: "commercial airplane pilot",
+            actionImg: "hands steadily near avionics control panels, sky bright outside",
+            actionVid: "adjusting cockpit ceiling switches, looking through the wind-shield showing distant clouds, cinematic cinematic glare",
+            suasanaDefault: "Duduk tegak di dalam kokpit pesawat modern yang dipenuhi tombol-tombol instrumen canggih, mengenakan seragam pilot putih lengkap dengan dasi hitam dan tanda pangkat di pundak, melihat ke luar jendela kokpit."
+        },
+        koki: {
+            titleEn: "professional head chef",
+            actionImg: "holding a fine ceramic gourmet plate with artful food placement",
+            actionVid: "garnish-dropping microgreens onto a beautiful plate, steam rising gently from a pan in the background, rack focus",
+            suasanaDefault: "Berdiri dengan bangga di dapur restoran bintang lima yang bersih berbahan stainless steel, mengenakan seragam koki whites (chef jacket) dan topi tinggi, sedang tersenyum."
+        },
+        guru_dosen: {
+            titleEn: "charismatic university professor",
+            actionImg: "holding a classic textbook, writing formulas on the board",
+            actionVid: "gesturing with hands while explaining eloquently, light dust motes dancing in auditorium window sunbeams",
+            suasanaDefault: "Berdiri di depan papan tulis besar di dalam ruang aula kuliah universitas modern, mengenakan pakaian blazer formal yang rapi, memegang buku, mengekspresikan cara mengajar yang cerdas dan bersahabat."
+        }
+    };
+
+    function updateSuasana() {
+        const profesi = document.getElementById("profesi").value;
+        document.getElementById("suasana").value = templateProfesi[profesi].suasanaDefault;
+    }
+
+    function generatePromptAll() {
+        const nama = document.getElementById("nama").value || "Zian Agesta";
+        const profesiKey = document.getElementById("profesi").value;
+        const pObj = templateProfesi[profesiKey];
+        
+        const genderSelected = document.querySelector('input[name="gender"]:checked').value;
+        const usiaSelected = document.querySelector('input[name="usia"]:checked').value;
+        const orientasiSelected = document.querySelector('input[name="orientasi"]:checked').value;
+        
+        let genderNoun = "man";
+        let pronounSubject = "he";
+        let pronounPossessive = "his";
+        let beautyAdjective = "handsome";
+
+        if (genderSelected === "female") {
+            genderNoun = "woman";
+            pronounSubject = "she";
+            pronounPossessive = "her";
+            beautyAdjective = "beautiful";
+        }
+        
+        let ageModifierEn = "young adult";
+        if (usiaSelected === "toddler_1") {
+            ageModifierEn = "adorable 1 to 3 years old toddler";
+            genderNoun = (genderSelected === "male") ? "boy" : "girl";
+            beautyAdjective = "cute and innocent";
+        } else if (usiaSelected === "kid_4") {
+            ageModifierEn = "cute 7 years old child";
+            genderNoun = (genderSelected === "male") ? "boy" : "girl";
+            beautyAdjective = "adorable";
+        } else if (usiaSelected === "teenager") {
+            ageModifierEn = "charming 16 years old teenager";
+            genderNoun = (genderSelected === "male") ? "boy" : "girl";
+        } else if (usiaSelected === "young") {
+            ageModifierEn = "young adult";
+        } else if (usiaSelected === "mature") {
+            ageModifierEn = "successful mature mid-30s";
+        } else if (usiaSelected === "middle") {
+            ageModifierEn = "experienced middle-aged";
+        } else if (usiaSelected === "elderly") {
+            ageModifierEn = "wise elderly silver-haired";
+        }
+        
+        let outfitDetails = "";
+        if (profesiKey.startsWith("dokter")) {
+            outfitDetails = `wearing a professional clean white doctor's coat, a realistic crisp nametag reading "${nama}" pinned on the pocket, stethoscopes included.`;
+        } else if (profesiKey === "petani_modern") {
+            outfitDetails = `wearing a smart clean country flannel uniform, with a tech smart-badge showing "${nama}".`;
+        } else if (profesiKey === "peternak_sukses") {
+            outfitDetails = `wearing a practical professional farm operations polo shirt, badge reads "${nama}".`;
+        } else if (profesiKey === "ceo_bisnis") {
+            outfitDetails = `dressed in premium luxury corporate tailored suit garment attire, desk nameplate nearby reads "${nama}".`;
+        } else if (profesiKey === "tni_militer") {
+            outfitDetails = `wearing an immaculate detailed official military ceremonial dress uniform with honorary pins, golden chest plate engraving reads "${nama}".`;
+        } else if (profesiKey === "polisi") {
+            outfitDetails = `wearing a neat official law enforcement police uniform coat with badges, silver chest nametag reads "${nama}".`;
+        } else if (profesiKey === "hakim_pengacara") {
+            outfitDetails = `wearing a formal traditional majestic court robe, desk plate clearly spells "${nama}".`;
+        } else if (profesiKey === "data_scientist") {
+            outfitDetails = `wearing smart casual outfit with a digital high-tech laboratory ID clip reading "${nama}".`;
+        } else if (profesiKey === "arsitek") {
+            outfitDetails = `wearing an designer apparel with an agency studio ID badge reading "${nama}".`;
+        } else if (profesiKey === "astronot") {
+            outfitDetails = `enclosed in a highly detailed realistic NASA space-suit system, fabric patch embroidered with "${nama}".`;
+        } else if (profesiKey === "pilot") {
+            outfitDetails = `wearing an official airline captain white uniform with gold rank shoulder epaulets, custom nametag states "${nama}".`;
+        } else if (profesiKey === "koki") {
+            outfitDetails = `wearing a traditional white double-breasted chef jacket coat and tall hat, elegant custom embroidery reads "${nama}".`;
+        } else if (profesiKey === "guru_dosen") {
+            outfitDetails = `wearing an academic blazer suit jacket, with a small metallic nametag pinned reading "${nama}".`;
+        }
+
+        let aspectParam = "--ar 3:4";
+        let cameraShotImg = "medium-shot portrait";
+        let cameraShotVid = "medium shot";
+
+        if (orientasiSelected === "landscape") {
+            aspectParam = "--ar 16:9";
+            cameraShotImg = "wide cinematic medium-shot portrait";
+            cameraShotVid = "wide cinematic medium shot";
+        }
+
+        const finalPromptImg = `A photorealistic ${cameraShotImg} of a Southeast Asian ${ageModifierEn} ${genderNoun} as a ${pObj.titleEn}. ${beautyAdjective} facial features, detailed skin texture. ${pronounSubject.toUpperCase()} is ${pObj.actionImg}, ${outfitDetails} Modern workspace environment, shallow depth of field, high-end commercial photography, cinematic soft studio lighting, ultra-realistic ${aspectParam} --style raw --v 6.0 --quality 2`;
+
+        const finalPromptVid = `Cinematic slow-motion ${cameraShotVid} of a Southeast Asian ${ageModifierEn} ${genderNoun} working as a ${pObj.titleEn}. ${pronounSubject.toUpperCase()} is ${outfitDetails} ${pronounSubject.toUpperCase()} is ${pObj.actionVid}. Highly photorealistic, volumetric studio lightning, 8k resolution, crisp details, high dynamic range movie quality, continuous natural movement, no morphing, 4k textures.`;
+
+        document.getElementById("outputPromptImg").value = finalPromptImg;
+        document.getElementById("outputPromptVid").value = finalPromptVid;
+        document.getElementById("resultBox").style.display = "block";
+    }
+
+    // Fungsi salin murni tanpa mengalihkan halaman web
+    function onlyCopyPrompt(textareaId) {
+        const copyTextarea = document.getElementById(textareaId);
+
+        if (!copyTextarea.value) {
+            alert("Silakan buat prompt terlebih dahulu dengan menekan tombol 'Buat Prompt Gambar & Video'!");
+            return;
+        }
+
+        copyTextarea.select();
+        copyTextarea.setSelectionRange(0, 99999);
+
+        navigator.clipboard.writeText(copyTextarea.value).then(() => {
+            alert("Prompt berhasil disalin ke clipboard! Silakan paste langsung ke website AI pilihan Anda.");
+        }).catch(err => {
+            alert("Gagal menyalin teks: ", err);
+        });
+    }
+</script>
+
+</body>
+</html>

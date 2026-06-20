@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Analisis CP, Materi, TP, ATP, Prota & Promes SMP (BSKAP 046/H/KR/2025)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #1a365d;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #1a365d;
+            margin: 0 0 5px 0;
+            font-size: 26px;
+        }
+        .header p {
+            color: #666;
+            margin: 0 0 5px 0;
+            font-size: 14px;
+        }
+        .header .developer {
+            color: #2b6cb0;
+            font-weight: bold;
+            font-size: 13px;
+            margin: 0;
+        }
+        .control-panel {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+            min-width: 250px;
+        }
+        label {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 14px;
+        }
+        select, input {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e0;
+            font-size: 15px;
+            background-color: #fff;
+            outline: none;
+            width: 100%;
+        }
+        select:focus, input:focus {
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+        }
+        .btn-print {
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            align-self: flex-end;
+            height: 42px;
+        }
+        .btn-print:hover {
+            background-color: #2b6cb0;
+        }
+        .output-section {
+            display: none;
+        }
+        .meta-info-table {
+            width: 100%;
+            margin-bottom: 25px;
+            border-collapse: collapse;
+        }
+        .meta-info-table td {
+            padding: 6px 10px;
+            font-size: 14px;
+        }
+        .meta-info-table td.label {
+            font-weight: bold;
+            width: 180px;
+            color: #2d3748;
+        }
+        .elemen-box {
+            background-color: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 0 6px 6px 0;
+        }
+        .elemen-box h3 {
+            margin: 0 0 8px 0;
+            color: #2b6cb0;
+            font-size: 16px;
+        }
+        .elemen-box p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 40px;
+        }
+        table.data-table th, table.data-table td {
+            border: 1px solid #cbd5e0;
+            padding: 12px;
+            font-size: 14px;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        table.data-table th {
+            background-color: #1a365d;
+            color: white;
+            font-weight: 600;
+        }
+        table.data-table tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .welcome-msg {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+            border: 2px dashed #e2e8f0;
+            border-radius: 8px;
+        }
+        .input-jp {
+            width: 70px;
+            padding: 6px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+        }
+        table.promes-table th, table.promes-table td {
+            padding: 5px 2px !important;
+            font-size: 11px !important;
+            text-align: center !important;
+            vertical-align: middle !important;
+        }
+        table.promes-table td.text-left {
+            text-align: left !important;
+            font-size: 13px !important;
+            padding: 8px !important;
+        }
+        .cell-minggu {
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.1s;
+            font-weight: bold;
+            width: 24px;
+        }
+        .cell-minggu:hover {
+            background-color: #e2e8f0;
+        }
+        .bg-checked {
+            background-color: #3182ce !important;
+            color: white !important;
+        }
+        @media print {
+            body { background-color: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 0; }
+            .control-panel, .welcome-msg, .btn-print, .promes-note { display: none !important; }
+            .output-section { display: block !important; }
+            table.data-table th { background-color: #1a365d !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .elemen-box { background-color: #f0f4f8 !important; border-left: 4px solid #1a365d !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .page-break { page-break-before: always; }
+            .input-jp { border: none !important; background: transparent !important; padding: 0 !important; width: auto !important; }
+            .input-jp::-webkit-outer-spin-button, .input-jp::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+            .input-jp { -moz-appearance: textfield; }
+            .bg-checked { background-color: #3182ce !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .cell-minggu:empty { background-color: transparent !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>ANALISIS ADMINISTRASI PEMBELAJARAN INTEGRAL FASE D (SMP)</h1>
+        <p>Berdasarkan Keputusan Kepala BSKAP Nomor 046/H/KR/2025</p>
+        <p class="developer">Pengembang Aplikasi: Rahmat Gufron Tsani, S.Pd., MCE</p>
+    </div>
+
+    <div class="control-panel">
+        <div class="control-group">
+            <label for="mapelSelect">Pilih Mata Pelajaran:</label>
+            <select id="mapelSelect" onchange="updateData()">
+                <option value="">-- Pilih Mata Pelajaran --</option>
+                <option value="pancasila">Pendidikan Pancasila</option>
+                <option value="indonesia">Bahasa Indonesia</option>
+                <option value="matematika">Matematika</option>
+                <option value="ipa">Ilmu Pengetahuan Alam (IPA)</option>
+                <option value="ips">Ilmu Pengetahuan Sosial (IPS)</option>
+                <option value="inggris">Bahasa Inggris</option>
+                <option value="informatika">Informatika</option>
+                <option value="pjok">PJOK</option>
+                <option value="senirupa">Seni Rupa</option>
+                <option value="senimusik">Seni Musik</option>
+                <option value="prakaryakerajinan">Prakarya (Kerajinan)</option>
+                <option value="prakaryapengolahan">Prakarya (Pengolahan)</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="mediaSelect">Pilih Media Pembelajaran Digital Interaktif:</label>
+            <select id="mediaSelect" onchange="updateData()">
+                <option value="all">Semua Media Interaktif (Variatif)</option>
+                <option value="quizizz">Quizizz (Kuis & Presentasi Interaktif)</option>
+                <option value="wordwall">Wordwall (Game Edukasi & Asesmen Gawai)</option>
+                <option value="kahoot">Kahoot (Gamifikasi Pembelajaran Real-time)</option>
+                <option value="nearpod">Nearpod (Presentasi & Konten Kolaboratif)</option>
+                <option value="mentimeter">Mentimeter (Polling & Respon Cepat Siswa)</option>
+                <option value="padlet">Padlet (Mading Digital & Diskusi Kolaboratif)</option>
+                <option value="liveworksheets">Liveworksheets (Lembar Kerja Peserta Didik Interaktif)</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="namaGuru">Nama Guru Pengampu:</label>
+            <input type="text" id="namaGuru" placeholder="Contoh: Nama Anda, S.Pd." oninput="updateMeta()">
+        </div>
+        <div class="control-group">
+            <label for="namaSekolah">Nama Sekolah:</label>
+            <input type="text" id="namaSekolah" placeholder="Contoh: SMP Negeri 1 Jakarta" oninput="updateMeta()">
+        </div>
+        <button class="btn-print" onclick="window.print()">Cetak / Simpan PDF</button>
+    </div>
+
+    <div id="welcomeBox" class="welcome-msg">
+        <h3>Selamat Datang di Generator Administrasi Kurikulum Merdeka</h3>
+        <p>Silakan pilih Mata Pelajaran pada menu drop-down di atas. Seluruh ringkasan Capaian Pembelajaran, Pembagian Elemen, Materi Utama, Rumusan TP, Alur Tujuan Pembelajaran (ATP), Program Tahunan (PROTA), serta Program Semester (PROMES) otomatis terintegrasi.</p>
+        <p style="font-size: 12px; margin-top: 15px; color: #a0aec0;">Aplikasi dikembangkan oleh: Rahmat Gufron Tsani, S.Pd., MCE</p>
+    </div>
+
+    <div id="outputSection" class="output-section">
+        
+        <table class="meta-info-table">
+            <tr>
+                <td class="label">Mata Pelajaran</td>
+                <td>: <span id="lblMapel">-</span></td>
+                <td class="label">Fase / Kelas</td>
+                <td>: D / VII, VIII, IX (SMP)</td>
+            </tr>
+            <tr>
+                <td class="label">Guru Pengampu</td>
+                <td>: <span id="lblGuru">-</span></td>
+                <td class="label">Tahun Ajaran</td>
+                <td>: 2026/2027</td>
+            </tr>
+            <tr>
+                <td class="label">Nama Satuan Pendidikan</td>
+                <td>: <span id="lblSekolah">-</span></td>
+                <td class="label">Sistem & Regulasi</td>
+                <td>: BSKAP 046/H/KR/2025 | By Rahmat Gufron Tsani</td>
+            </tr>
+        </table>
+
+        <div id="elemenContainer"></div>
+
+        <h3 style="color: #1a365d; border-bottom: 2px solid #1a365d; padding-bottom: 5px; margin-top: 30px;">Matriks Perencanaan: Materi, TP, dan Alur Tujuan Pembelajaran (ATP)</h3>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Elemen CP</th>
+                    <th style="width: 20%;">Lingkup Materi Utama</th>
+                    <th style="width: 35%;">Rumusan Tujuan Pembelajaran (TP)</th>
+                    <th style="width: 20%;">Alur Tujuan Pembelajaran (ATP) & Media Rekomendasi</th>
+                    <th style="width: 10%;">Alokasi Waktu</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <div class="page-break"></div>
+        <h3 style="color: #1a365d; border-bottom: 2px solid #1a365d; padding-bottom: 5px; margin-top: 40px;">PROGRAM TAHUNAN (PROTA) FASE D</h3>
+        <p style="font-size: 14px; color: #4a5568; margin-bottom: 15px;">Berikut adalah distribusi alokasi waktu pelaksanaan Tujuan Pembelajaran (TP) yang dipetakan ke dalam Semester 1 dan Semester 2 secara proporsional. Anda dapat mengubah angka Jam Pelajaran (JP) secara langsung pada kotak di bawah ini.</p>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%; text-align: center;">No</th>
+                    <th style="width: 15%;">Elemen</th>
+                    <th style="width: 50%;">Tujuan Pembelajaran (TP)</th>
+                    <th style="width: 15%; text-align: center;">Smtr 1 (JP)</th>
+                    <th style="width: 15%; text-align: center;">Smtr 2 (JP)</th>
+                </tr>
+            </thead>
+            <tbody id="protaBody"></tbody>
+            <tfoot>
+                <tr style="background-color: #edf2f7; font-weight: bold;">
+                    <td colspan="3" style="text-align: right; padding: 12px;">TOTAL ALOKASI WAKTU TAHUNAN:</td>
+                    <td id="totalSmtr1" style="text-align: center; color: #1a365d;">0 JP</td>
+                    <td id="totalSmtr2" style="text-align: center; color: #1a365d;">0 JP</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="page-break"></div>
+        <h3 style="color: #1a365d; border-bottom: 2px solid #1a365d; padding-bottom: 5px; margin-top: 40px;">PROGRAM SEMESTER 1 (GANJIL)</h3>
+        <p class="promes-note" style="font-size: 14px; color: #4a5568; margin-bottom: 15px;">💡 <b>Petunjuk Pengisian Manual:</b> Minggu pelaksanaan sudah terplot otomatis secara default. Anda bisa <b>mengklik kotak minggu</b> di bawah ini secara langsung untuk menambahkan atau menghapus tanda centang (✓) sesuai kalender pendidikan sekolah Anda.</p>
+        
+        <table class="data-table promes-table">
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 3%;">No</th>
+                    <th rowspan="2" style="width: 45%;">Tujuan Pembelajaran (TP)</th>
+                    <th rowspan="2" style="width: 6%;">Alokasi</th>
+                    <th colspan="4">Juli</th>
+                    <th colspan="4">Agustus</th>
+                    <th colspan="4">September</th>
+                    <th colspan="4">Oktober</th>
+                    <th colspan="4">November</th>
+                    <th colspan="4">Desember</th>
+                </tr>
+                <tr>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                </tr>
+            </thead>
+            <tbody id="promes1Body"></tbody>
+        </table>
+
+        <div class="page-break"></div>
+        <h3 style="color: #1a365d; border-bottom: 2px solid #1a365d; padding-bottom: 5px; margin-top: 40px;">PROGRAM SEMESTER 2 (GENAP)</h3>
+        <p class="promes-note" style="font-size: 14px; color: #4a5568; margin-bottom: 15px;">💡 <b>Petunjuk Pengisian Manual:</b> Anda bisa <b>mengklik kotak minggu</b> di bawah ini secara langsung untuk menambahkan atau menghapus tanda centang (✓) rencana pelaksanaan.</p>
+        
+        <table class="data-table promes-table">
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 3%;">No</th>
+                    <th rowspan="2" style="width: 45%;">Tujuan Pembelajaran (TP)</th>
+                    <th rowspan="2" style="width: 6%;">Alokasi</th>
+                    <th colspan="4">Januari</th>
+                    <th colspan="4">Februari</th>
+                    <th colspan="4">Maret</th>
+                    <th colspan="4">April</th>
+                    <th colspan="4">Mei</th>
+                    <th colspan="4">Juni</th>
+                </tr>
+                <tr>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th>
+                </tr>
+            </thead>
+            <tbody id="promes2Body"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const database = {
+        pancasila: {
+            title: "Pendidikan Pancasila",
+            elemen: [
+                { nama: "Pancasila", isi: "Memahami sejarah kelahiran Pancasila; memahami kedudukan Pancasila sebagai dasar negara, pandangan hidup bangsa, dan ideologi negara serta penerapannya dalam kehidupan sehari-hari; memahami makna keterkaitan Pancasila dengan UUD NRI Tahun 1945, Bhinneka Tunggal Ika, dan NKRI." },
+                { nama: "Undang-Undang Dasar Negara Republik Indonesia Tahun 1945", isi: "Menerapkan norma dan aturan; memahami tata urutan peraturan perundang-undangan; menyadari pentingnya mematuhi hukum." },
+                { nama: "Bhinneka Tunggal Ika", isi: "Menerima dan menghargai keberagaman dalam kehidupan bermasyarakat; memahami pentingnya pelestarian tradisi, kearifan lokal, dan budaya daerah; menumbuhkan sikap tanggung jawab dalam masyarakat global." },
+                { nama: "Negara Kesatuan Republik Indonesia (NKRI)", isi: "Memahami Proklamasi Kemerdekaan RI; memahami wilayah NKRI dalam konteks wawasan nusantara; berpartisipasi aktif menjaga keutuhan wilayah NKRI." }
+            ],
+            rows: [
+                ["Pancasila", "Sejarah Kelahiran Pancasila", "TP 1.1 Murid mampu menganalisis kronologi sejarah kelahiran Pancasila berdasarkan sidang BPUPK dan Panitia Sembilan.", "Mulai diajarkan di Kelas VII Semester 1 sebagai fondasi utama ideologi.", "6 JP"],
+                ["Pancasila", "Kedudukan & Fungsi Pancasila", "TP 1.2 Murid mampu menjelaskan fungsi Pancasila sebagai dasar negara, pandangan hidup bangsa, dan ideologi negara dalam keseharian.", "Melanjutkan TP 1.1 pada Kelas VII Semester 1 dengan studi kasus penerapan sehari-hari.", "6 JP"],
+                ["UUD NRI 1945", "Tata Urutan Perundang-undangan", "TP 2.2 Murid mampu mengurutkan hierarki peraturan perundang-undangan di Indonesia serta konsekuensi hukumnya.", "Diajarkan pada Kelas VIII Semester 1 untuk pemahaman ketatanegaraan.", "8 JP"],
+                ["Bhinneka Tunggal Ika", "Keberagaman SARA & Toleransi", "TP 3.1 Murid mampu menerima, menghargai, dan mengelola keberagaman suku, agama, ras, dan antargolongan secara inklusif.", "Diajarkan pada Kelas VIII Semester 1 untuk membangun semangat toleransi antarsiswa.", "8 JP"],
+                ["UUD NRI 1945", "Norma dan Aturan Masyarakat", "TP 2.1 Murid mampu mengidentifikasi, menghormati, dan menerapkan norma serta aturan hukum yang berlaku di lingkungan terdekat.", "Diajarkan pada Kelas VII Semester 2 untuk membentuk disiplin sosial.", "8 JP"],
+                ["Bhinneka Tunggal Ika", "Pelestarian Tradisi & Budaya Lokal", "TP 3.2 Murid mampu merancang aksi nyata pemeliharaan serta pelestarian tradisi lokal dan kearifan budaya daerah.", "Ditempatkan pada Kelas VIII Semester 2, berkolaborasi dengan kegiatan berbasis kearifan lokal.", "8 JP"],
+                ["NKRI", "Makna Proklamasi & Wawasan Nusantara", "TP 4.1 Murid mampu mengonstruksi makna Proklamasi Kemerdekaan RI serta konsep wilayah Indonesia sebagai satu kesatuan wawasan nusantara.", "Diajarkan pada Kelas IX Semester 1 sebagai penguat wawasan kebangsaan.", "6 JP"],
+                ["NKRI", "Menjaga Keutuhan Wilayah NKRI", "TP 4.2 Murid mampu menunjukkan perilaku aktif, bela negara, dan komitmen dalam menjaga keutuhan wilayah NKRI dari ancaman.", "Diajarkan pada Kelas IX Semester 2 menjelang kelulusan sekolah.", "8 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Pancasila", tp: "TP 1.1 Murid mampu menganalisis kronologi sejarah kelahiran Pancasila berdasarkan sidang BPUPK dan Panitia Sembilan.", s1: 6, s2: 0, slot: [0, 1] },
+                { nomor: 2, elemen: "Pancasila", tp: "TP 1.2 Murid mampu menjelaskan fungsi Pancasila sebagai dasar negara, pandangan hidup bangsa, dan ideologi negara dalam keseharian.", s1: 6, s2: 0, slot: [2, 3] },
+                { nomor: 3, elemen: "UUD NRI 1945", tp: "TP 2.2 Murid mampu mengurutkan hierarki peraturan perundang-undangan di Indonesia serta konsekuensi hukumnya.", s1: 8, s2: 0, slot: [4, 5, 6] },
+                { nomor: 4, elemen: "Bhinneka Tunggal Ika", tp: "TP 3.1 Murid mampu menerima, menghargai, and mengelola keberagaman suku, agama, ras, dan antargolongan secara inklusif.", s1: 8, s2: 0, slot: [7, 8, 9] },
+                { nomor: 5, elemen: "NKRI", tp: "TP 4.1 Murid mampu mengonstruksi makna Proklamasi Kemerdekaan RI serta konsep wilayah Indonesia sebagai satu kesatuan wawasan nusantara.", s1: 6, s2: 0, slot: [10, 11] },
+                { nomor: 6, elemen: "UUD NRI 1945", tp: "TP 2.1 Murid mampu mengidentifikasi, menghormati, dan menerapkan norma serta aturan hukum yang berlaku di lingkungan terdekat.", s1: 0, s2: 8, slot: [0, 1, 2] },
+                { nomor: 7, elemen: "Bhinneka Tunggal Ika", tp: "TP 3.2 Murid mampu merancang aksi nyata pemeliharaan serta pelestarian tradisi lokal dan kearifan budaya daerah.", s1: 0, s2: 8, slot: [3, 4, 5] },
+                { nomor: 8, elemen: "NKRI", tp: "TP 4.2 Murid mampu menunjukkan perilaku aktif, bela negara, dan komitmen dalam menjaga keutuhan wilayah NKRI dari ancaman.", s1: 0, s2: 8, slot: [6, 7, 8] }
+            ]
+        },
+        indonesia: {
+            title: "Bahasa Indonesia",
+            elemen: [
+                { nama: "Menyimak", isi: "Peserta didik mampu menganalisis dan mengevaluasi informasi dari berbagai tipe teks (deskripsi, narasi, eksposisi, eksplanasi, dan diskusi) yang didengarkan baik langsung maupun lewat media." },
+                { nama: "Membaca dan Memirsa", isi: "Peserta didik mampu mengevaluasi informasi, menemukan gagasan utama, gagasan penjelas, serta mengeksplorasi makna tersurat dan tersirat pada berbagai jenis teks." },
+                { nama: "Berbicara dan Memresentasikan", isi: "Peserta didik mampu menyampaikan gagasan, pikiran, atau argumen secara logis, runtut, kritis, dan kreatif dengan pilihan kata dan intonasi yang tepat." },
+                { nama: "Menulis", isi: "Peserta didik mampu menulis gagasan, pikiran, pandangan, atau arahan dalam bentuk berbagai jenis teks secara logis, sistematis, estetis, dan kritis." }
+            ],
+            rows: [
+                ["Membaca & Memirsa", "Teks Deskripsi", "TP 1.1 Murid mampu mengidentifikasi karakteristik objek, struktur kebahasaan, dan menemukan informasi tersurat dalam teks deskripsi.", "Diajarkan sebagai teks pertama di Kelas VII Semester 1.", "12 JP"],
+                ["Membaca & Memirsa", "Teks Cerita Fantasi (Narasi)", "TP 1.2 Murid mampu menganalisis unsur intrinsik (alur, tokoh, latar) serta pesan tersirat dalam teks narasi cerita fantasi.", "Melanjutkan alur teks narasi setelah deskripsi di Kelas VII Semester 1.", "12 JP"],
+                ["Menyimak & Berbicara", "Teks Artikel Ilmiah Populer", "TP 3.1 Murid mampu membedakan fakta dan opini serta mengevaluasi validitas data dalam teks eksposisi/artikel ilmiah populer.", "Diajarkan pada tingkat menengah di Kelas VIII Semester 1.", "12 JP"],
+                ["Menulis", "Teks Ulasan Karya Seni / Buku", "TP 4.1 Murid mampu menulis resensi atau ulasan kritis terhadap karya sastra (buku/film) secara objektif dan estetis.", "Diajarkan di Kelas IX Semester 1 untuk pendalaman evaluasi karya.", "12 JP"],
+                ["Menulis", "Teks Prosedur", "TP 2.1 Murid mampu menyusun teks prosedur yang logis dan runtut dengan menggunakan kata perintah dan konjungsi kronologis.", "Diajarkan di Kelas VII Semester 2 untuk melatih penulisan instruksional.", "14 JP"],
+                ["Menulis", "Teks Laporan Hasil Observasi (LHO)", "TP 2.2 Murid mampu menulis laporan hasil observasi secara objektif, sistematis, dan berdasarkan fakta riil di lapangan.", "Ditempatkan di Kelas VII Semester 2 untuk mengawali penulisan berbasis data nyata.", "14 JP"],
+                ["Berbicara & Memresentasikan", "Teks Diskusi & Debat", "TP 3.2 Murid mampu menyajikan gagasan dan menyanggah argumen orang lain secara santun melalui forum diskusi atau debat kelas.", "Diajarkan di Kelas VIII Semester 2 untuk melatih kompetensi berbicara kritis.", "16 JP"],
+                ["Berbicara & Memresentasikan", "Teks Drama / Musikalisasi Puisi", "TP 4.2 Murid mampu mengomunikasikan ekspresi, emosi, dan pesan moral melalui pementasan teks drama atau pembacaan puisi.", "Ditempatkan di Kelas IX Semester 2 sebagai karya penutup tingkat lanjut.", "16 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Membaca & Memirsa", tp: "TP 1.1 Murid mampu mengidentifikasi karakteristik objek, struktur kebahasaan, dan menemukan informasi tersurat dalam teks deskripsi.", s1: 12, s2: 0, slot: [0, 1, 2] },
+                { nomor: 2, elemen: "Membaca & Memirsa", tp: "TP 1.2 Murid mampu menganalisis unsur intrinsik (alur, tokoh, latar) serta pesan tersirat dalam teks narasi cerita fantasi.", s1: 12, s2: 0, slot: [3, 4, 5] },
+                { nomor: 3, elemen: "Menyimak & Berbicara", tp: "TP 3.1 Murid mampu membedakan fakta dan opini serta mengevaluasi validitas data dalam teks eksposisi/artikel ilmiah populer.", s1: 12, s2: 0, slot: [6, 7, 8] },
+                { nomor: 4, elemen: "Menulis", tp: "TP 4.1 Murid mampu menulis resensi atau ulasan kritis terhadap karya sastra (buku/film) secara objektif dan estetis.", s1: 12, s2: 0, slot: [9, 10, 11] },
+                { nomor: 5, elemen: "Menulis", tp: "TP 2.1 Murid mampu menyusun teks prosedur yang logis dan runtut dengan menggunakan kata perintah dan konjungsi kronologis.", s1: 0, s2: 14, slot: [0, 1, 2, 3] },
+                { nomor: 6, elemen: "Menulis", tp: "TP 2.2 Murid mampu menulis laporan hasil observasi secara objektif, sistematis, dan berdasarkan fakta riil di lapangan.", s1: 0, s2: 14, slot: [4, 5, 6, 7] },
+                { nomor: 7, elemen: "Berbicara & Memresentasikan", tp: "TP 3.2 Murid mampu menyajikan gagasan dan menyanggah argumen orang lain secara santun melalui forum diskusi atau debat kelas.", s1: 0, s2: 16, slot: [8, 9, 10, 11] },
+                { nomor: 8, elemen: "Berbicara & Memresentasikan", tp: "TP 4.2 Murid mampu mengomunikasikan ekspresi, emosi, dan pesan moral melalui pementasan teks drama atau pembacaan puisi.", s1: 0, s2: 16, slot: [12, 13, 14, 15] }
+            ]
+        },
+        matematika: {
+            title: "Matematika",
+            elemen: [
+                { nama: "Bilangan", isi: "Peserta didik dapat membaca, menulis, dan membandingkan bilangan bulat, bilangan rasional, bilangan desimal, bilangan berpangkat bulat, serta menggunakannya dalam menyelesaikan masalah kehidupan sehari-hari." },
+                { nama: "Aljabar", isi: "Peserta didik dapat mengenali, membuat, dan menggeneralisasi pola dalam bentuk susunan benda dan bilangan; menyatakan suatu situasi ke dalam bentuk aljabar; menyelesaikan SPLDV." },
+                { nama: "Geometri", isi: "Peserta didik dapat membuat jaring-jaring bangun ruang, menghitung luas permukaan dan volume bangun ruang (prisma, tabung, bola, kerucut), serta menggunakan teorema Pythagoras." },
+                { nama: "Analisis Data dan Peluang", isi: "Peserta didik dapat merumuskan pertanyaan, mengumpulkan, menyajikan, dan menganalisis data menggunakan diagram batang, garis, atau lingkaran; menentukan peluang kejadian tunggal." }
+            ],
+            rows: [
+                ["Bilangan", "Operasi Bilangan Bulat", "TP 1.1 Murid dapat melakukan operasi hitung campuran (penjumlahan, pengurangan, perkalian, pembagian) pada bilangan bulat.", "Fondasi awal Matematika SMP, wajib diajarkan di awal Kelas VII Semester 1.", "14 JP"],
+                ["Bilangan", "Bilangan Pecahan & Rasional", "TP 1.2 Murid dapat membandingkan nilai dan memecahkan masalah kontekstual yang melibatkan bilangan pecahan/rasional.", "Resonansi numerasi di Kelas VII Semester 1.", "16 JP"],
+                ["Aljabar", "Persamaan & Pertidaksamaan Linear", "TP 2.2 Murid dapat menentukan penyelesaian nilai variabel pada persamaan linear satu variabel (PLSV) dan sistem persamaan dua variabel (SPLDV).", "Diajarkan berurutan dari PLSV (Kelas VII) hingga SPLDV di Kelas VIII Semester 1.", "20 JP"],
+                ["Analisis Data", "Statistika & Penyajian Data", "TP 4.1 Murid dapat mengumpulkan data, menentukan pemusatan data (mean, median, modus), dan menyajikannya dalam berbagai diagram.", "Diajarkan di Kelas IX Semester 1 untuk kemampuan pengolahan data riil.", "12 JP"],
+                ["Aljabar", "Unsur & Penyederhanaan Aljabar", "TP 2.1 Murid dapat mengidentifikasi variabel, koefisien, konstanta, dan menyederhanakan bentuk aljabar linear.", "Diajarkan di Kelas VII Semester 2 sebagai transisi dari aritmetika ke aljabar.", "16 JP"],
+                ["Geometri", "Teorema Pythagoras", "TP 3.1 Murid dapat membuktikan dan menerapkan Teorema Pythagoras untuk mencari panjang sisi segitiga siku-siku.", "Diajarkan pada Kelas VIII Semester 2 sebagai dasar perhitungan geometri.", "14 JP"],
+                ["Geometri", "Luas Permukaan & Volume Bangun Ruang", "TP 3.2 Murid dapat menghitung luas kulit dan volume ruang dari prisma, limas, tabung, kerucut, dan bola, serta gabungannya.", "Diajarkan secara berkelanjutan di Kelas VIII (Sisi Datar) dan Kelas IX (Sisi Lengkung).", "18 JP"],
+                ["Peluang", "Peluang Kejadian Tunggal", "TP 4.2 Murid dapat menentukan peluang teoretis dan empiris dari suatu kejadian tunggal pada pelemparan dadu/koin.", "Diajarkan di Kelas IX Semester 2 sebagai bab matematika akhir.", "12 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Bilangan", tp: "TP 1.1 Murid dapat melakukan operasi hitung campuran pada bilangan bulat.", s1: 14, s2: 0, slot: [0, 1, 2] },
+                { nomor: 2, elemen: "Bilangan", tp: "TP 1.2 Murid dapat membandingkan nilai dan memecahkan masalah kontekstual bilangan pecahan/rasional.", s1: 16, s2: 0, slot: [3, 4, 5, 6] },
+                { nomor: 3, elemen: "Aljabar", tp: "TP 2.2 Murid dapat menentukan penyelesaian nilai variabel pada PLSV dan SPLDV.", s1: 20, s2: 0, slot: [7, 8, 9, 10, 11] },
+                { nomor: 4, elemen: "Analisis Data", tp: "TP 4.1 Murid dapat mengumpulkan data, menentukan pemusatan data, and menyajikannya dalam berbagai diagram.", s1: 12, s2: 0, slot: [12, 13, 14] },
+                { nomor: 5, elemen: "Aljabar", tp: "TP 2.1 Murid dapat mengidentifikasi variabel, koefisien, konstanta, dan menyederhanakan bentuk aljabar linear.", s1: 0, s2: 16, slot: [0, 1, 2, 3] },
+                { nomor: 6, elemen: "Geometri", tp: "TP 3.1 Murid dapat membuktikan dan menerapkan Teorema Pythagoras.", s1: 0, s2: 14, slot: [4, 5, 6, 7] },
+                { nomor: 7, elemen: "Geometri", tp: "TP 3.2 Murid dapat menghitung luas permukaan dan volume bangun ruang.", s1: 0, s2: 18, slot: [8, 9, 10, 11, 12] },
+                { nomor: 8, elemen: "Peluang", tp: "TP 4.2 Murid dapat menentukan peluang teoretis dan empiris dari suatu kejadian tunggal.", s1: 0, s2: 12, slot: [13, 14, 15] }
+            ]
+        },
+        ipa: {
+            title: "Ilmu Pengetahuan Alam (IPA)",
+            elemen: [
+                { nama: "Pemahaman IPA", isi: "Mencakup pemahaman konsep tentang makhluk hidup dan lingkungannya; karakteristik, wujud, dan perubahan zat; gaya, usaha, energi, dan pesawat sederhana; gelombang, cahaya, dan alat optik; tata surya dan struktur lapisan bumi." },
+                { nama: "Keterampilan Proses", isi: "Mencakup keterampilan dalam mengamati; mempertanyakan dan memprediksi; merencanakan dan melakukan penyelidikan; memproses, menganalisis data dan informasi; mengevaluasi dan refleksi; serta mengomunikasikan hasil penyelidikan." }
+            ],
+            rows: [
+                ["Pemahaman & Proses", "Metode Ilmiah & Pengukuran", "TP 1.1 Murid mampu merancang langkah eksperimen mandiri menggunakan variabel bebas, terikat, dan kontrol secara aman di laboratorium.", "Diajarkan di awal Kelas VII Semester 1 sebagai adaptasi keterampilan laboratorium.", "15 JP"],
+                ["Pemahaman IPA", "Zat, Karakteristik & Perubahannya", "TP 1.2 Murid mampu membedakan kerapatan partikel zat serta menganalisis perbedaan perubahan fisika dan perubahan kimia.", "Melanjutkan pemahaman materi tak hidup di Kelas VII Semester 1.", "15 JP"],
+                ["Pemahaman IPA", "Sel sebagai Unit Kehidupan", "TP 2.1 Murid mampu membandingkan komponen organel sel hewan dan sel tumbuhan melalui hasil pengamatan mikroskop.", "Diajarkan di awal Kelas VIII Semester 1 untuk memulai materi biologi sel.", "15 JP"],
+                ["Pemahaman IPA", "Sistem Organisasi Tubuh Manusia", "TP 2.2 Murid mampu menganalisis keterkaitan fungsi organ pada sistem pencernaan, peredaran darah, dan pernapasan manusia.", "Pendalaman biologi manusia yang diletakkan pada Kelas VIII Semester 1.", "20 JP"],
+                ["Pemahaman IPA", "Pewarisan Sifat (Genetika)", "TP 4.2 Murid mampu menerapkan prinsip hukum Mendel untuk memprediksi hasil persilangan monohibrid dan dihibrid.", "Materi kompleks tingkat tinggi yang diajarkan pada Kelas IX Semester 1.", "18 JP"],
+                ["Pemahaman IPA", "Gaya, Hukum Newton & Usaha", "TP 3.1 Murid mampu mengorelasikan pengaruh gaya terhadap gerak benda berdasarkan Hukum I, II, dan III Newton.", "Materi fisika mekanika dasar yang diposisikan pada Kelas VIII Semester 2.", "15 JP"],
+                ["Pemahaman IPA", "Pesawat Sederhana", "TP 3.2 Murid mampu menghitung keuntungan mekanis pada tuas, katrol, dan bidang miring dalam membantu kerja manusia.", "Kelanjutan dari topik usaha dan gaya di Kelas VIII Semester 2.", "15 JP"],
+                ["Pemahaman IPA", "Ekosistem & Lingkungan Hidup", "TP 4.1 Murid mampu mendeteksi kerusakan jaring-jaring makanan akibat pencemaran lingkungan serta merancang solusi konservasinya.", "Diajarkan di Kelas VII (Ekosistem Dasar) dan diperdalam isu globalnya di Kelas IX.", "15 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Pemahaman & Proses", tp: "TP 1.1 Murid mampu merancang langkah eksperimen mandiri menggunakan variabel kontrol secara aman.", s1: 15, s2: 0, slot: [0, 1, 2] },
+                { nomor: 2, elemen: "Pemahaman IPA", tp: "TP 1.2 Murid mampu membedakan kerapatan partikel zat serta menganalisis perbedaan perubahan fisika dan kimia.", s1: 15, s2: 0, slot: [3, 4, 5] },
+                { nomor: 3, elemen: "Pemahaman IPA", tp: "TP 2.1 Murid mampu membandingkan komponen organel sel hewan dan sel tumbuhan.", s1: 15, s2: 0, slot: [6, 7, 8] },
+                { nomor: 4, elemen: "Pemahaman IPA", tp: "TP 2.2 Murid mampu menganalisis keterkaitan fungsi organ pada sistem pencernaan, darah, dan napas.", s1: 20, s2: 0, slot: [9, 10, 11, 12] },
+                { nomor: 5, elemen: "Pemahaman IPA", tp: "TP 4.2 Murid mampu menerapkan prinsip hukum Mendel untuk memprediksi hasil persilangan.", s1: 18, s2: 0, slot: [13, 14, 15] },
+                { nomor: 6, elemen: "Pemahaman IPA", tp: "TP 3.1 Murid mampu mengorelasikan pengaruh gaya terhadap gerak benda berdasarkan Hukum Newton.", s1: 0, s2: 15, slot: [0, 1, 2, 3] },
+                { nomor: 7, elemen: "Pemahaman IPA", tp: "TP 3.2 Murid mampu menghitung keuntungan mekanis pada pesawat sederhana.", s1: 0, s2: 15, slot: [4, 5, 6, 7] },
+                { nomor: 8, elemen: "Pemahaman IPA", tp: "TP 4.1 Murid mampu mendeteksi kerusakan jaring-jaring makanan akibat pencemaran lingkungan.", s1: 0, s2: 15, slot: [8, 9, 10, 11] }
+            ]
+        },
+        ips: {
+            title: "Ilmu Pengetahuan Sosial (IPS)",
+            elemen: [
+                { nama: "Pemahaman Konsep IPS", isi: "Mampu memahami realitas kehidupan manusia secara ruang dan waktu; menganalisis keterkaitan kondisi geografis dengan potensi sumber daya; memahami dinamika sosial budaya, kelembagaan, serta pemenuhan kebutuhan ekonomi masyarakat." },
+                { nama: "Keterampilan Proses IPS", isi: "Mampu mengamati fenomena sosial; merumuskan pertanyaan/masalah; mengumpulkan sumber sejarah atau data sosial; menganalisis informasi; menarik kesimpulan dan mengomunikasikannya dalam bentuk laporan/media digital." }
+            ],
+            rows: [
+                ["Pemahaman Konsep", "Letak Geografis & Ruang Bumi", "TP 1.1 Murid mampu menganalisis pengaruh astronomis dan geografis Indonesia terhadap pembagian zona waktu dan tipe iklim.", "Menjadi materi pembuka IPS Geografi di Kelas VII Semester 1.", "12 JP"],
+                ["Pemahaman Konsep", "Potensi Sumber Daya Alam", "TP 1.2 Murid mampu mendeskripsikan keragaman potensi sumber daya hutan, tambang, dan kemaritiman di wilayah Indonesia.", "Kelanjutan materi spasial bumi di Kelas VII Semester 1.", "12 JP"],
+                ["Pemahaman Konsep", "Kolonialisme Barat di Indonesia", "TP 2.2 Murid mampu menganalisis faktor penjelajahan samudra dan dampak eksploitasi kolonial terhadap pergeseran struktur sosial bangsa.", "Diposisikan di Kelas VIII Semester 1 untuk kerangka sejarah perjuangan.", "16 JP"],
+                ["Pemahaman Konsep", "Perubahan Sosial & Globalisasi", "TP 4.1 Murid mampu mengevaluasi pengaruh westernisasi dan globalisasi informasi terhadap pergeseran nilai moral remaja.", "Materi IPS Sosiologi tingkat lanjut di Kelas IX Semester 1.", "16 JP"],
+                ["Pemahaman Konsep", "Sejarah Masa Praaksara & Hindu-Buddha", "TP 2.1 Murid mampu membandingkan corak sosial ekonomi dan peninggalan budaya dari masa berburu hingga masa kerajaan maritim Hindu-Buddha.", "Materi IPS Sejarah yang dipelajari di Kelas VII Semester 2 hingga Kelas VIII.", "16 JP"],
+                ["Pemahaman Konsep", "Kelangkaan & Kegiatan Ekonomi", "TP 3.1 Murid mampu menganalisis faktor penyebab terjadinya kelangkaan barang/jasa serta menyusun skala prioritas kebutuhan.", "Materi IPS Ekonomi yang diletakkan di Kelas VII (Dasar) dan Kelas VIII.", "14 JP"],
+                ["Pemahaman Konsep", "Lembaga Keuangan & Literasi Finansial", "TP 3.2 Murid mampu merencanakan pengelolaan keuangan mandiri (saving/spending) memanfaatkan peran bank dan lembaga keuangan.", "Materi literasi praktis yang diajarkan di Kelas VIII Semester 2.", "12 JP"],
+                ["Pemahaman Konsep", "Pelestarian Tradisi & Budaya Lokal", "TP 4.2 Murid mampu merumuskan strategi adaptasi komunitas adat dalam melestarikan kearifan lokal dari kepunahan modernisasi.", "Materi penutup reflektif pada Kelas IX Semester 2.", "14 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Pemahaman Konsep", tp: "TP 1.1 Murid mampu menganalisis pengaruh astronomis dan geografis Indonesia terhadap iklim.", s1: 12, s2: 0, slot: [0, 1, 2] },
+                { nomor: 2, elemen: "Pemahaman Konsep", tp: "TP 1.2 Murid mampu mendeskripsikan keragaman potensi sumber daya alam kemaritiman Indonesia.", s1: 12, s2: 0, slot: [3, 4, 5] },
+                { nomor: 3, elemen: "Pemahaman Konsep", tp: "TP 2.2 Murid mampu menganalisis dampak eksploitasi kolonial Barat terhadap pergeseran struktur sosial.", s1: 16, s2: 0, slot: [6, 7, 8, 9] },
+                { nomor: 4, elemen: "Pemahaman Konsep", tp: "TP 4.1 Murid mampu mengevaluasi pengaruh globalisasi informasi terhadap nilai moral remaja.", s1: 16, s2: 0, slot: [10, 11, 12, 13] },
+                { nomor: 5, elemen: "Pemahaman Konsep", tp: "TP 2.1 Murid mampu membandingkan corak peninggalan budaya praaksara dan maritim Hindu-Buddha.", s1: 0, s2: 16, slot: [0, 1, 2, 3] },
+                { nomor: 6, elemen: "Pemahaman Konsep", tp: "TP 3.1 Murid mampu menganalisis faktor kelangkaan barang/jasa serta menyusun skala prioritas.", s1: 0, s2: 14, slot: [4, 5, 6, 7] },
+                { nomor: 7, elemen: "Pemahaman Konsep", tp: "TP 3.2 Murid mampu merencanakan pengelolaan keuangan mandiri (literasi finansial).", s1: 0, s2: 12, slot: [8, 9, 10] },
+                { nomor: 8, elemen: "Pemahaman Konsep", tp: "TP 4.2 Murid mampu merumuskan strategi adaptasi komunitas adat dalam menjaga kearifan lokal.", s1: 0, s2: 14, slot: [11, 12, 13, 14] }
+            ]
+        },
+        inggris: {
+            title: "Bahasa Inggris",
+            elemen: [
+                { nama: "Listening - Speaking", isi: "Students use English to interact and exchange ideas, experiences, interests, and opinions in familiar formal and informal situations with appropriate pronunciation and intonation." },
+                { nama: "Reading - Viewing", isi: "Students read and respond to familiar and unfamiliar texts containing descriptive, narrative, report, and procedure structures to find specific information and main ideas." },
+                { nama: "Writing - Presenting", isi: "Students communicate their ideas, experiences, and opinions through simple organized written texts with correct word choice, grammar, and punctuation." }
+            ],
+            rows: [
+                ["Listening & Speaking", "Self & Others Introduction", "TP 1.1 Students can confidently use common interpersonal expressions to introduce themselves, share names, origins, and personal hobbies.", "Taught at the absolute beginning of Class VII Semester 1 to build confidence.", "10 JP"],
+                ["Listening & Speaking", "Expressing Opinions & Preferences", "TP 1.2 Students can ask for and give simple opinions, agreement, and disagreement regarding daily school life topics.", "Continuous language skill development in Class VII Semester 1.", "12 JP"],
+                ["Reading & Viewing", "Recount Text (Past Events)", "TP 2.2 Students can extract chronological events, time connectives, and identify past actions in simple texts about personal experiences.", "Introduced in Class VIII Semester 1 to practice using simple past tense.", "16 JP"],
+                ["Reading & Viewing", "Descriptive Text (People & Objects)", "TP 2.1 Students can identify physical characteristics, personality traits, and specific descriptive adjectives from short texts.", "Core reading text for Class VII Semester 2 to build descriptive vocabulary.", "14 JP"],
+                ["Writing & Presenting", "Procedure Text (Recipes & Manuals)", "TP 3.1 Students can write a structured recipe or step-by-step user guide using imperative verbs and sequential adverbs.", "Taught in Class VIII Semester 2 to align with practical everyday commands.", "16 JP"],
+                ["Reading & Writing", "Narrative Text (Fables & Legends)", "TP 3.2 Students can analyze the orientation, complication, resolution, and write alternative endings for simple moral stories.", "Positioned in Class IX Semester 1 for advanced comprehension of literary texts.", "16 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Listening & Speaking", tp: "TP 1.1 Students can confidently use common interpersonal expressions to introduce themselves.", s1: 10, s2: 0, slot: [0, 1, 2] },
+                { nomor: 2, elemen: "Listening & Speaking", tp: "TP 1.2 Students can ask for and give simple opinions and agreement regarding daily topics.", s1: 12, s2: 0, slot: [3, 4, 5] },
+                { nomor: 3, elemen: "Reading & Viewing", tp: "TP 2.2 Students can extract chronological events and past actions in simple recount texts.", s1: 16, s2: 0, slot: [6, 7, 8, 9] },
+                { nomor: 4, elemen: "Reading & Writing", tp: "TP 3.2 Students can analyze the orientation and complication of narrative texts.", s1: 16, s2: 0, slot: [10, 11, 12, 13] },
+                { nomor: 5, elemen: "Reading & Viewing", tp: "TP 2.1 Students can identify physical characteristics and descriptive adjectives from texts.", s1: 0, s2: 14, slot: [0, 1, 2, 3] },
+                { nomor: 6, elemen: "Writing & Presenting", tp: "TP 3.1 Students can write a structured recipe or step-by-step procedure text guide.", s1: 0, s2: 16, slot: [4, 5, 6, 7, 8] }
+            ]
+        },
+        informatika: {
+            title: "Informatika",
+            elemen: [
+                { nama: "Berpikir Komputasional (BK)", isi: "Menerapkan strategi algoritmik standar untuk menyelesaikan persoalan data diskrit volume kecil yang mengandung pola, dekomposisi, abstraksi, dan logika berpikir." },
+                { nama: "Teknologi Informasi dan Komunikasi (TIK)", isi: "Memanfaatkan berbagai aplikasi (pengolah kata, lembar kerja, presentasi) untuk mengintegrasikan konten dokumen, analisis data, dan visualisasi secara semi-otomatis." },
+                { nama: "Sistem Komputer (SK) & Jaringan (JKI)", isi: "Memahami interaksi perangkat keras, perangkat lunak, sistem operasi, serta mekanisme pengiriman data yang aman melalui jaringan kabel atau nirkabel." },
+                { nama: "Algoritma Pemrograman (AP) & Analisis Data (AD)", isi: "Mengembangkan program visual menggunakan blok instruksi terstruktur (kondisional, perulangan, variabel) untuk memproses data atau membuat simulasi digital." }
+            ],
+            rows: [
+                ["Berpikir Komputasional", "Pilar Berpikir Komputasional", "TP 1.1 Murid mampu menyelesaikan teka-teki logika biner dan representasi data menggunakan metode dekomposisi, pengenalan pola, dan abstraksi.", "Diajarkan di awal Kelas VII Semester 1 sebagai pembentuk cara berpikir sistematis.", "10 JP"],
+                ["Teknologi Informasi", "Integrasi Aplikasi Perkantoran", "TP 2.1 Murid mampu mempraktikkan fitur mail-merge, object embedding tabel spreadsheet ke dokumen pengolah kata, serta menyusun slide presentasi yang efektif.", "Diajarkan pada Kelas VII Semester 1 untuk mendukung tugas sekolah.", "14 JP"],
+                ["Jaringan Komputer", "Koneksi Internet & Keamanan", "TP 3.2 Murid mampu mengidentifikasi rute transfer data nirkabel serta mempraktikkan pengamanan enkripsi sandi untuk melindungi privasi digital.", "Diajarkan pada Kelas VIII Semester 1 untuk kesadaran keamanan siber.", "10 JP"],
+                ["Analisis Data", "Pengolahan Data Elektronik", "TP 4.2 Murid mampu memfilter, mengurutkan, dan menerapkan rumus logika matematika (sum, average, count, if) pada lembar kerja data volume menengah.", "Diajarkan pada Kelas IX Semester 1 untuk keterampilan interpretasi data.", "14 JP"],
+                ["Sistem Komputer", "Hardware, Software & OS", "TP 3.1 Murid mampu menjelaskan fungsi unit pemroses sentral (CPU), memori (RAM), media penyimpanan, dan bagaimana sistem operasi mengelola perangkat tersebut.", "Materi perangkat keras komputer di Kelas VII Semester 2 / Kelas VIII.", "10 JP"],
+                ["Algoritma Pemrograman", "Pemrograman Visual Blok", "TP 4.1 Murid mampu merancang algoritma perulangan (loop) dan penyeleksian kondisi (if-else) ke dalam kode blok pemrograman Scratch/Blockly.", "Materi praktik interaktif utama yang diletakkan pada Kelas VIII Semester 2.", "18 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Berpikir Komputasional", tp: "TP 1.1 Murid mampu menyelesaikan teka-teki logika biner menggunakan pilar berpikir komputasional.", s1: 10, s2: 0, slot: [0, 1, 2] },
+                { nomor: 2, elemen: "Teknologi Informasi", tp: "TP 2.1 Murid mampu mempraktikkan fitur mail-merge dan object embedding aplikasi kantor.", s1: 14, s2: 0, slot: [3, 4, 5, 6] },
+                { nomor: 3, elemen: "Jaringan Komputer", tp: "TP 3.2 Murid mampu mempraktikkan pengamanan enkripsi sandi privasi digital.", s1: 10, s2: 0, slot: [7, 8, 9] },
+                { nomor: 4, elemen: "Analisis Data", tp: "TP 4.2 Murid mampu menerapkan rumus logika matematika pada aplikasi spreadsheet lembar kerja.", s1: 14, s2: 0, slot: [10, 11, 12, 13] },
+                { nomor: 5, elemen: "Sistem Komputer", tp: "TP 3.1 Murid mampu menjelaskan fungsi perangkat keras (hardware) dan sistem operasi komputer.", s1: 0, s2: 10, slot: [0, 1, 2, 3] },
+                { nomor: 6, elemen: "Algoritma Pemrograman", tp: "TP 4.1 Murid mampu merancang algoritma perulangan dan kondisional pada pemrograman visual blok.", s1: 0, s2: 18, slot: [4, 5, 6, 7, 8, 9] }
+            ]
+        },
+        pjok: {
+            title: "Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK)",
+            elemen: [
+                { nama: "Keterampilan Gerak", isi: "Mempraktikkan variasi dan kombinasi keterampilan gerak spesifik yang menunjang performa olahraga permainan (bola besar/kecil), atletik, bela diri, senam, dan aktivitas air." },
+                { nama: "Pengetahuan Gerak", isi: "Menganalisis prosedur, prinsip, mekanika, dan taktik dasar pelaksanaan gerak spesifik olahraga yang dipraktikkan." },
+                { nama: "Pemanfaatan Gerak", isi: "Menganalisis prinsip latihan kebugaran jasmani untuk menjaga kesehatan serta memahami tindakan preventif terhadap bahaya narkoba, pergaulan bebas, dan pola makan sehat." }
+            ],
+            rows: [
+                ["Keterampilan & Pengetahuan", "Permainan Bola Besar (Sepakbola/Voli)", "TP 1.1 Murid mampu mempraktikkan sekaligus menganalisis variasi teknik passing, dribbling, dan shooting dengan koordinasi tubuh yang tepat.", "Diajarkan pada Kelas VII Semester 1 sebagai aktivitas fisik tim.", "12 JP"],
+                ["Keterampilan & Pengetahuan", "Olahraga Atletik (Lari & Lompat)", "TP 2.1 Murid mampu mempraktikkan mekanika start jongkok, ayunan lengan saat sprint, serta fase tolakan pada lompat jauh.", "Dipraktikkan di Kelas VIII Semester 1 untuk nomor atletik dasar.", "12 JP"],
+                ["Pemanfaatan Gerak", "Kebugaran Jasmani & Kesehatan", "TP 3.1 Murid mampu menganalisis dan mempraktikkan sirkuit latihan daya tahan, kekuatan, kelentukan, serta menghitung denyut nadi maksimal.", "Diajarkan berkala di awal setiap Semester 1 untuk skrining kondisi fisik.", "9 JP"],
+                ["Keterampilan & Pengetahuan", "Permainan Bola Kecil (Bulutangkis/Kasti)", "TP 1.2 Murid melakukan gerak spesifik servis, pukulan forehand, backhand, serta taktik penempatan posisi lapangan.", "Aktivitas raket/pukulan pada Kelas VII Semester 2.", "9 JP"],
+                ["Keterampilan & Pengetahuan", "Olahraga Bela Diri (Pencak Silat)", "TP 2.2 Murid mampu mendemonstrasikan kuda-kuda, pola langkah, tangkisan, dan pukulan terencana dalam bela diri tradisional.", "Diajarkan pada Kelas VIII Semester 2 sebagai materi pelestarian budaya.", "9 JP"],
+                ["Pemanfaatan Gerak", "Kesehatan Reproduksi & NAPZA", "TP 3.2 Murid mampu memaparkan bahaya penyalahgunaan narkoba, konsekuensi pergaulan bebas, serta mengampanyekan pola makan gizi seimbang.", "Materi teori kesehatan esensial di Kelas IX Semester 2.", "12 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Keterampilan & Pengetahuan", tp: "TP 1.1 Murid mampu mempraktikkan sekaligus menganalisis variasi teknik permainan bola besar.", s1: 12, s2: 0, slot: [0, 1, 2, 3] },
+                { nomor: 2, elemen: "Keterampilan & Pengetahuan", tp: "TP 2.1 Murid mampu mempraktikkan mekanika lari dan fase tolakan lompat jauh atletik.", s1: 12, s2: 0, slot: [4, 5, 6, 7] },
+                { nomor: 3, elemen: "Pemanfaatan Gerak", tp: "TP 3.1 Murid mampu mempraktikkan sirkuit latihan kebugaran jasmani komponen daya tahan.", s1: 9, s2: 0, slot: [8, 9, 10] },
+                { nomor: 4, elemen: "Keterampilan & Pengetahuan", tp: "TP 1.2 Murid mampu melakukan gerak spesifik servis dan pukulan permainan bola kecil.", s1: 0, s2: 9, slot: [0, 1, 2] },
+                { nomor: 5, elemen: "Keterampilan & Pengetahuan", tp: "TP 2.2 Murid mampu mendemonstrasikan variasi tangkisan dan pukulan olahraga bela diri.", s1: 0, s2: 9, slot: [3, 4, 5] },
+                { nomor: 6, elemen: "Pemanfaatan Gerak", tp: "TP 3.2 Murid mampu memaparkan bahaya penyalahgunaan narkoba dan pergaulan bebas.", s1: 0, s2: 12, slot: [6, 7, 8, 9] }
+            ]
+        },
+        senirupa: {
+            title: "Seni Rupa",
+            elemen: [
+                { nama: "Mengalami (Experiencing)", isi: "Peserta didik mampu mengamati, merekam, dan menganalisis unsur-unsur rupa dan prinsip desain di lingkungan sekitar secara kritis." },
+                { nama: "Menciptakan (Making)", isi: "Peserta didik mampu memilih dan menggunakan aneka media, alat, dan teknik menggambar/membuat karya dua atau tiga dimensi." }
+            ],
+            rows: [
+                ["Mengalami & Menciptakan", "Menggambar Alam Benda (Proposi & Perspektif)", "TP 1.1 Murid mampu menggambar objek alam benda dengan menerapkan kaidah perspektif satu titik hilang dan proporsi bayangan gelap-terang secara akurat.", "Materi rupa paling mendasar di Kelas VII Semester 1.", "12 JP"],
+                ["Menciptakan", "Desain Poster & Reklame Komersial", "TP 2.1 Murid mampu menyusun tata letak (layout) tipografi, kombinasi warna komplementer, dan ilustrasi komunikatif dalam media poster propaganda/iklan.", "Diajarkan pada Kelas VIII Semester 1 untuk implementasi seni terapan.", "14 JP"],
+                ["Menciptakan", "Menggambar Ragam Hias Nusantara", "TP 1.2 Murid mampu menggubah bentuk flora, fauna, atau geometris menjadi stilasi motif ragam hias pada media kertas atau triplek.", "Ditempatkan di Kelas VII Semester 2 sebagai apresiasi kearifan lokal.", "12 JP"],
+                ["Menciptakan", "Membuat Karya Seni Kriya 3 Dimensi", "TP 2.2 Murid mampu membuat ragam bentuk maket struktur ruang atau anyaman dekoratif menggunakan material kertas, bambu, atau kawat.", "Materi ekspresi rupa volumetrik pada Kelas VIII Semester 2.", "14 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Mengalami & Menciptakan", tp: "TP 1.1 Murid mampu menggambar objek alam benda perspektif satu titik hilang.", s1: 12, s2: 0, slot: [0, 1, 2, 3] },
+                { nomor: 2, elemen: "Menciptakan", tp: "TP 2.1 Murid mampu menyusun tata letak desain tipografi poster iklan komersial.", s1: 14, s2: 0, slot: [4, 5, 6, 7] },
+                { nomor: 3, elemen: "Menciptakan", tp: "TP 1.2 Murid mampu menggubah bentuk flora menjadi stilasi motif ragam hias.", s1: 0, s2: 12, slot: [0, 1, 2, 3] },
+                { nomor: 4, elemen: "Menciptakan", tp: "TP 2.2 Murid mampu membuat bentuk maket kriya 3 dimensi material kertas/kawat.", s1: 0, s2: 14, slot: [4, 5, 6, 7] }
+            ]
+        },
+        senimusik: {
+            title: "Seni Musik",
+            elemen: [
+                { nama: "Mendengar dan Menyimak", isi: "Peserta didik mampu menyimak, mengenali, dan mengapresiasi karakteristik bunyi musik, struktur ritme, dan melodi dari berbagai genre musik lokal maupun global." },
+                { nama: "Merefleksikan (Reflecting)", isi: "Peserta didik mampu memberikan umpan balik, kritik estetis, atau analisis subjektif objektif yang konstruktif atas sebuah pertunjukan karya musik." }
+            ],
+            rows: [
+                ["Mendengar & Menyimak", "Teknik Vokal & Bernyanyi Unisono", "TP 1.1 Murid mampu mempraktikkan teknik pernapasan diafragma, artikulasi vokal jernih, dan intonasi tepat saat bernyanyi lagu daerah secara unisono.", "Fondasi olah suara awal Kelas VII Semester 1.", "12 JP"],
+                ["Mendengar & Menyimak", "Membaca Notasi Balok & Ritme", "TP 2.1 Murid mampu menerjemahkan simbol notasi balok, tanda birama (2/4, 3/4, 4/4), dan nilai ketukan ke dalam ketukan perkusi tangan.", "Teori membaca ritme dasar pada Kelas VIII Semester 1.", "12 JP"],
+                ["Mendengar & Menyimak", "Ansambel Musik Campuran", "TP 1.2 Murid mampu memainkan lagu secara harmonis dalam kelompok menggunakan alat musik ritmis dan melodis (pianika/recorder).", "Praktik bermain instrumen kelompok pada Kelas VII Semester 2.", "16 JP"],
+                ["Merefleksikan", "Apresiasi Musik Nusantara & Barat", "TP 2.2 Murid mampu membuat laporan ulasan (review) kritis mengenai perbedaan struktur harmoni, tangga nada pentatonis dan diatonis pertunjukan konser musik.", "Analisis musik teoretis pada Kelas VIII Semester 2.", "12 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Mendengar & Menyimak", tp: "TP 1.1 Murid mampu mempraktikkan teknik pernapasan diafragma saat bernyanyi unisono.", s1: 12, s2: 0, slot: [0, 1, 2, 3] },
+                { nomor: 2, elemen: "Mendengar & Menyimak", tp: "TP 2.1 Murid mampu menerjemahkan simbol notasi balok dan nilai ketukan birama.", s1: 12, s2: 0, slot: [4, 5, 6, 7] },
+                { nomor: 3, elemen: "Mendengar & Menyimak", tp: "TP 1.2 Murid mampu memainkan lagu harmoni kelompok alat musik ansambel campuran.", s1: 0, s2: 16, slot: [0, 1, 2, 3, 4] },
+                { nomor: 4, elemen: "Merefleksikan", tp: "TP 2.2 Murid mampu membuat ulasan kritis perbedaan tangga nada pentatonis dan diatonis.", s1: 0, s2: 12, slot: [5, 6, 7, 8] }
+            ]
+        },
+        prakaryakerajinan: {
+            title: "Prakarya (Kerajinan)",
+            elemen: [
+                { nama: "Desain dan Perencanaan", isi: "Peserta didik mampu merancang produk kerajinan berdasarkan analisis kebutuhan, ketersediaan bahan, estetika wujud, dan teknik pengerjaan." },
+                { nama: "Produksi dan Evaluasi", isi: "Peserta didik mampu membuat produk kerajinan nusantara modifikasi secara higienis, aman, menggunakan aneka peralatan mekanik tangan secara tepat, serta menguji kekuatannya." }
+            ],
+            rows: [
+                ["Desain & Perencanaan", "Kerajinan Bahan Alam Lunak", "TP 1.1 Murid mampu merancang ide desain sketsa produk fungsional menggunakan bahan alam lunak (tanah liat/clay/flour clay) bernilai jual.", "Materi eksplorasi bahan dasar lunak di Kelas VII Semester 1.", "12 JP"],
+                ["Produksi & Evaluasi", "Kerajinan Bahan Keras Modifikasi", "TP 2.1 Murid mampu membuat kerajinan kombinasi bahan keras (kayu, bambu, atau logam kaleng) menggunakan teknik potong, rakit, sambung secara aman.", "Praktik pengerjaan konstruktif bahan keras di Kelas VIII Semester 1.", "16 JP"],
+                ["Produksi & Evaluasi", "Pembuatan Kerajinan Bahan Alam Lunak", "TP 1.2 Murid mampu membentuk produk wadah dekoratif dari clay buatan secara presisi, melakukan finishing pewarnaan, serta membuat kemasan karton pelindung.", "Kelanjutan produksi kriya lunak di Kelas VII Semester 2.", "14 JP"],
+                ["Produksi & Evaluasi", "Uji Kelayakan & Desain Kemasan", "TP 2.2 Murid mampu menguji kekuatan beban fungsi produk bahan keras serta merancang kemasan akrilik/plastik yang menonjolkan estetika produk.", "Tahap evaluasi produk komersial akhir di Kelas VIII Semester 2.", "14 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Desain & Perencanaan", tp: "TP 1.1 Murid mampu merancang ide sketsa produk fungsional bahan alam lunak.", s1: 12, s2: 0, slot: [0, 1, 2, 3] },
+                { nomor: 2, elemen: "Produksi & Evaluasi", tp: "TP 2.1 Murid mampu membuat kerajinan kombinasi bahan keras teknik rakit potong.", s1: 16, s2: 0, slot: [4, 5, 6, 7, 8] },
+                { nomor: 3, elemen: "Produksi & Evaluasi", tp: "TP 1.2 Murid mampu membentuk wadah dekoratif clay buatan beserta kemasan karton.", s1: 0, s2: 14, slot: [0, 1, 2, 3, 4] },
+                { nomor: 4, elemen: "Produksi & Evaluasi", tp: "TP 2.2 Murid mampu menguji kekuatan beban produk serta merancang kemasan estetis.", s1: 0, s2: 14, slot: [5, 6, 7, 8, 9] }
+            ]
+        },
+        prakaryapengolahan: {
+            title: "Prakarya (Pengolahan)",
+            elemen: [
+                { nama: "Desain dan Perencanaan Kuliner", isi: "Peserta didik mampu menyusun resep dan rencana alur kerja pengolahan bahan pangan komoditas lokal menjadi produk pangan instan atau siap saji." },
+                { nama: "Produksi, Sanitasi dan Penyajian", isi: "Peserta didik mampu mempraktikkan pengolahan pangan olahan hewani/nabati dengan menerapkan higienitas sanitasi total, keselamatan kerja, serta teknik garnish penyajian piring kreatif." }
+            ],
+            rows: [
+                ["Desain & Perencanaan", "Pengolahan Pangan Buah & Sayur", "TP 1.1 Murid mampu mengidentifikasi kandungan vitamin serta menyusun resep minuman fungsional sehat berbasis komoditas buah lokal daerah setempat.", "Materi dasar pengolahan nabati sederhana di Kelas VII Semester 1.", "12 JP"],
+                ["Produksi & Sanitasi", "Pengolahan Hasil Peternakan & Perikanan", "TP 2.1 Murid mampu mengolah bahan pangan setengah jadi dari daging ayam, sapi, atau ikan menjadi hidangan kuliner nusantara siap santap.", "Materi utama olahan hewani protein di Kelas VIII Semester 1.", "16 JP"],
+                ["Produksi & Sanitasi", "Teknik Memasak & Higienitas Kuliner", "TP 1.2 Murid mampu mempraktikkan teknik boiling, steaming, frying untuk membuat kudapan tradisional bersanitasi bersih tanpa kontaminasi silang.", "Pengenalan teknik dasar memasak panas basah/kering di Kelas VII Semester 2.", "14 JP"],
+                ["Produksi & Penyajian", "Pengemasan Vakum & Garnish Penyajian", "TP 2.2 Murid mampu mengemas produk olahan pangan kering menggunakan kemasan plastik kedap udara (vacuum packaging) dan menata hidangan piring saji dengan garnish menarik.", "Materi manajemen kemasan awetan tahan lama Kelas VIII Semester 2.", "14 JP"]
+            ],
+            prota: [
+                { nomor: 1, elemen: "Desain & Perencanaan", tp: "TP 1.1 Murid mampu menyusun resep minuman fungsional berbasis buah lokal daerah.", s1: 12, s2: 0, slot: [0, 1, 2, 3] },
+                { nomor: 2, elemen: "Produksi & Sanitasi", tp: "TP 2.1 Murid mampu mengolah bahan pangan setengah jadi hewani menjadi hidangan nusantara.", s1: 16, s2: 0, slot: [4, 5, 6, 7, 8] },
+                { nomor: 3, elemen: "Produksi & Sanitasi", tp: "TP 1.2 Murid mampu mempraktikkan teknik boiling/steaming kudapan tradisional higienis.", s1: 0, s2: 14, slot: [0, 1, 2, 3, 4] },
+                { nomor: 4, elemen: "Produksi & Penyajian", tp: "TP 2.2 Murid mampu mengemas produk pangan kering menggunakan vacuum packaging.", s1: 0, s2: 14, slot: [5, 6, 7, 8, 9] }
+            ]
+        }
+    };
+
+    const mediaMapping = {
+        quizizz: "Quizizz",
+        wordwall: "Wordwall",
+        kahoot: "Kahoot",
+        nearpod: "Nearpod",
+        mentimeter: "Mentimeter",
+        padlet: "Padlet",
+        liveworksheets: "Liveworksheets"
+    };
+
+    function getRandomMedia(selectedMedia, index) {
+        if (selectedMedia !== "all") {
+            return mediaMapping[selectedMedia];
+        }
+        const mediaList = ["Quizizz", "Wordwall", "Kahoot", "Nearpod", "Mentimeter", "Padlet", "Liveworksheets"];
+        return mediaList[index % mediaList.length];
+    }
+
+    function updateData() {
+        const select = document.getElementById("mapelSelect");
+        const val = select.value;
+        const mediaVal = document.getElementById("mediaSelect").value;
+        
+        if (!val) {
+            document.getElementById("welcomeBox").style.display = "block";
+            document.getElementById("outputSection").style.display = "none";
+            return;
+        }
+        
+        document.getElementById("welcomeBox").style.display = "none";
+        document.getElementById("outputSection").style.display = "block";
+        
+        const data = database[val];
+        
+        document.getElementById("lblMapel").innerText = data.title;
+        
+        const elemenContainer = document.getElementById("elemenContainer");
+        elemenContainer.innerHTML = `<h3 style="color: #1a365d; border-bottom: 2px solid #1a365d; padding-bottom: 5px;">Deskripsi Capaian Pembelajaran Elemen (Fase D)</h3>`;
+        
+        data.elemen.forEach(el => {
+            elemenContainer.innerHTML += `
+                <div class="elemen-box">
+                    <h3>Elemen: ${el.nama}</h3>
+                    <p>${el.isi}</p>
+                </div>
+            `;
+        });
+        
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+        
+        data.rows.forEach((row, idx) => {
+            const recommendedMedia = getRandomMedia(mediaVal, idx);
+            tableBody.innerHTML += `
+                <tr>
+                    <td style="font-weight: 600; color: #2c5282;">${row[0]}</td>
+                    <td>${row[1]}</td>
+                    <td>${row[2]}</td>
+                    <td style="font-style: italic; color: #4a5568;">${row[3]} <br><strong style="color:#2b6cb0;">[Media Integrasi: ${recommendedMedia}]</strong></td>
+                    <td style="text-align: center; font-weight: bold; color: #2b6cb0;">${row[4]}</td>
+                </tr>
+            `;
+        });
+
+        const protaBody = document.getElementById("protaBody");
+        protaBody.innerHTML = "";
+        
+        data.prota.forEach((p, index) => {
+            protaBody.innerHTML += `
+                <tr>
+                    <td style="text-align: center;">${p.nomor}</td>
+                    <td style="font-weight: 500; color: #2d3748;">${p.elemen}</td>
+                    <td>${p.tp}</td>
+                    <td style="text-align: center;">
+                        <input type="number" class="input-jp input-s1" data-index="${index}" value="${p.s1}" min="0" oninput="hitungOtomatisTotal()"> JP
+                    </td>
+                    <td style="text-align: center;">
+                        <input type="number" class="input-jp input-s2" data-index="${index}" value="${p.s2}" min="0" oninput="hitungOtomatisTotal()"> JP
+                    </td>
+                </tr>
+            `;
+        });
+        
+        renderPromes(data.prota);
+        hitungOtomatisTotal();
+        updateMeta();
+    }
+
+    function renderPromes(protaData) {
+        const body1 = document.getElementById("promes1Body");
+        const body2 = document.getElementById("promes2Body");
+        
+        body1.innerHTML = "";
+        body2.innerHTML = "";
+        
+        let countS1 = 1;
+        let countS2 = 1;
+
+        protaData.forEach((p) => {
+            if (p.s1 > 0) {
+                let cols1 = "";
+                for (let i = 0; i < 24; i++) {
+                    const isChecked = p.slot && p.slot.includes(i) ? "bg-checked" : "";
+                    const mark = isChecked ? "✓" : "";
+                    cols1 += `<td class="cell-minggu ${isChecked}" onclick="toggleCell(this)">${mark}</td>`;
+                }
+                body1.innerHTML += `
+                    <tr>
+                        <td>${countS1++}</td>
+                        <td class="text-left">${p.tp}</td>
+                        <td style="font-weight: bold; color: #1a365d;" id="promes1-jp-${p.nomor}">${p.s1} JP</td>
+                        ${cols1}
+                    </tr>
+                `;
+            }
+
+            if (p.s2 > 0) {
+                let cols2 = "";
+                for (let i = 0; i < 24; i++) {
+                    const isChecked = p.slot && p.slot.includes(i) ? "bg-checked" : "";
+                    const mark = isChecked ? "✓" : "";
+                    cols2 += `<td class="cell-minggu ${isChecked}" onclick="toggleCell(this)">${mark}</td>`;
+                }
+                body2.innerHTML += `
+                    <tr>
+                        <td>${countS2++}</td>
+                        <td class="text-left">${p.tp}</td>
+                        <td style="font-weight: bold; color: #2b6cb0;" id="promes2-jp-${p.nomor}">${p.s2} JP</td>
+                        ${cols2}
+                    </tr>
+                `;
+            }
+        });
+    }
+
+    function toggleCell(cell) {
+        if (cell.classList.contains("bg-checked")) {
+            cell.classList.remove("bg-checked");
+            cell.innerText = "";
+        } else {
+            cell.classList.add("bg-checked");
+            cell.innerText = "✓";
+        }
+    }
+
+    function hitungOtomatisTotal() {
+        let totalS1 = 0;
+        let totalS2 = 0;
+
+        document.querySelectorAll('.input-s1').forEach(input => {
+            let nilai = parseInt(input.value);
+            if (!isNaN(nilai)) {
+                totalS1 += nilai;
+                let idx = input.getAttribute("data-index");
+                let select = document.getElementById("mapelSelect").value;
+                if(select && database[select].prota[idx]) {
+                    let no = database[select].prota[idx].nomor;
+                    let cellJp = document.getElementById(`promes1-jp-${no}`);
+                    if(cellJp) cellJp.innerText = nilai + " JP";
+                }
+            }
+        });
+
+        document.querySelectorAll('.input-s2').forEach(input => {
+            let nilai = parseInt(input.value);
+            if (!isNaN(nilai)) {
+                totalS2 += nilai;
+                let idx = input.getAttribute("data-index");
+                let select = document.getElementById("mapelSelect").value;
+                if(select && database[select].prota[idx]) {
+                    let no = database[select].prota[idx].nomor;
+                    let cellJp = document.getElementById(`promes2-jp-${no}`);
+                    if(cellJp) cellJp.innerText = nilai + " JP";
+                }
+            }
+        });
+
+        document.getElementById("totalSmtr1").innerText = totalS1 + " JP";
+        document.getElementById("totalSmtr2").innerText = totalS2 + " JP";
+    }
+
+    function updateMeta() {
+        const guruInput = document.getElementById("namaGuru").value;
+        const sekolahInput = document.getElementById("namaSekolah").value;
+        
+        document.getElementById("lblGuru").innerText = guruInput ? guruInput : "[Belum Diisi]";
+        document.getElementById("lblSekolah").innerText = sekolahInput ? sekolahInput : "[Belum Diisi]";
+    }
+</script>
+
+</body>
+</html>
